@@ -37,4 +37,10 @@ $(document).ready(function () {
       rippleEffect: true,
       rippleColor: "#ffffff",
     });
+
+    $("#MicBtn").click(function () {
+      $("#Oval").attr("hidden", true);
+      $("#SiriWave").attr("hidden", false);
+      eel.play_assistant_sound();
+    });  
 });

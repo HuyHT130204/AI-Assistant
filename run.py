@@ -24,3 +24,5 @@ if __name__ == "__main__":
         process2.join()
         
     print("System is terminated.")
+
+    # 1:59:43

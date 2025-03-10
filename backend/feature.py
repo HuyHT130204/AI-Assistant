@@ -1,17 +1,20 @@
 import os
 import re
+from shlex import quote
 import sqlite3
 import struct
+import subprocess
 import time
 import webbrowser
 import eel
 import pvporcupine
 import pyaudio
+import pyautogui
 import pywhatkit as kit
 import pygame
 from backend.config import ASSISTANT_NAME
 from backend.command import speak
-from backend.helper import extract_yt_term
+from backend.helper import extract_yt_term, remove_words
 
 conn = sqlite3.connect("jarvis.db")
 cursor = conn.cursor()
@@ -104,3 +107,89 @@ def hotword():
             audio_stream.close()
         if paud is not None:
             paud.terminate()
+
+def findContact(query):
+    # Cải thiện danh sách từ cần loại bỏ để tìm tên chính xác hơn
+    words_to_remove = [ASSISTANT_NAME, 'make', 'a', 'to', 'phone', 'call', 'send', 'message', 'wahtsapp', 'video',
+                      'call to', 'send message to']
+    query = remove_words(query, words_to_remove)
+
+    try:
+        query = query.strip().lower()
+        print(f"Looking for contact: '{query}'")
+        
+        # Tìm kiếm chính xác trước
+        cursor.execute("SELECT Phone, name FROM contacts WHERE LOWER(name) = ?", (query,))
+        results = cursor.fetchall()
+        
+        # Nếu không tìm thấy, thử tìm kiếm tương đối
+        if not results:
+            cursor.execute("SELECT Phone, name FROM contacts WHERE LOWER(name) LIKE ?", ('%' + query + '%',))
+            results = cursor.fetchall()
+            
+            # Nếu vẫn không tìm thấy, thử tìm kiếm từng phần của tên
+            if not results:
+                words = query.split()
+                for word in words:
+                    if len(word) > 2:  # Chỉ tìm kiếm với các từ có độ dài hợp lý
+                        cursor.execute("SELECT Phone, name FROM contacts WHERE LOWER(name) LIKE ?", ('%' + word + '%',))
+                        results = cursor.fetchall()
+                        if results:
+                            break
+                            
+        if results:
+            mobile_number_str = str(results[0][0])
+            actual_name = results[0][1]  # Lấy tên thực tế được lưu trữ
+            print(f"Found contact: {actual_name} with number: {mobile_number_str}")
+
+            if not mobile_number_str.startswith('+84'):
+                mobile_number_str = '+84' + mobile_number_str
+
+            return mobile_number_str, actual_name
+        else:
+            speak('Contact not found in your contacts')
+            return 0, 0
+    except Exception as e:
+        print(f"Error finding contact: {e}")
+        speak('Error occurred while searching contacts')
+        return 0, 0
+    
+def whatsApp(Phone, message, flag, name):
+    
+
+    if flag == 'message':
+        target_tab = 12
+        jarvis_message = "message send successfully to "+name
+
+    elif flag == 'call':
+        target_tab = 7
+        message = ''
+        jarvis_message = "calling to "+name
+
+    else:
+        target_tab = 6
+        message = ''
+        jarvis_message = "staring video call with "+name
+
+
+    # Encode the message for URL
+    encoded_message = quote(message)
+    print(encoded_message)
+    # Construct the URL
+    whatsapp_url = f"whatsapp://send?phone={Phone}&text={encoded_message}"
+
+    # Construct the full command
+    full_command = f'start "" "{whatsapp_url}"'
+
+    # Open WhatsApp with the constructed URL using cmd.exe
+    subprocess.run(full_command, shell=True)
+    time.sleep(5)
+    subprocess.run(full_command, shell=True)
+    
+    pyautogui.hotkey('ctrl', 'f')
+
+    for i in range(1, target_tab):
+        pyautogui.hotkey('tab')
+
+    pyautogui.hotkey('enter')
+    speak(jarvis_message)

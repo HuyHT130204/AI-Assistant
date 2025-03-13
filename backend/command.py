@@ -6,6 +6,7 @@ import re
 
 @eel.expose
 def speak(text):
+    text = str(text)
     engine = pyttsx3.init('sapi5')
     voices = engine.getProperty('voices')
     
@@ -16,7 +17,7 @@ def speak(text):
     
     engine.setProperty('voice', voices[voice_index].id)
     engine.setProperty('rate', 174)  # Set rate before speaking
-    
+    eel.receiverText(text)
     eel.DisplayMessage(text)
     engine.say(text)
     engine.runAndWait()
@@ -122,33 +123,42 @@ def takeAllCommand(message=None):
         
         # Xử lý các lệnh dựa trên tin nhắn văn bản
         try:
-            if "open" in query:
-                from backend.feature import openCommand
-                openCommand(query)
-            elif "send message" in query or "phone call" in query or "video call" in query:
-                print("Processing contact command")
-                from backend.feature import findContact, whatsApp
-                flag = ""
-                Phone, name = findContact(query)
-                if(Phone != 0):
-                    if "send message" in query:
-                        flag = 'message'
-                        speak("what message to send?")
-                        message_to_send = takecommand()  # Lấy tin nhắn bằng giọng nói
-                        if message_to_send is None:
-                            message_to_send = ""
-                        query = message_to_send
-                    elif "phone call" in query:
-                        flag = 'call'
-                    else:
-                        flag = 'video call'
-                    whatsApp(Phone, query, flag, name)
-            elif "youtube" in query:
-                from backend.feature import PlayYoutube
-                PlayYoutube(query)
+            if query:
+                if "open" in query:
+                    from backend.feature import openCommand
+                    openCommand(query)
+                elif "send message to" in query and "on facebook" in query:
+                    from backend.feature import facebookMessage
+                    facebookMessage(query)
+                elif "find" in query and "on facebook" in query:
+                    from backend.feature import facebookSearch
+                    facebookSearch(query)
+                elif "send message" in query or "phone call" in query or "video call" in query:
+                    print("Processing contact command")
+                    from backend.feature import findContact, whatsApp
+                    flag = ""
+                    Phone, name = findContact(query)
+                    if(Phone != 0):
+                        if "send message" in query:
+                            flag = 'message'
+                            speak("what message to send?")
+                            message_to_send = takecommand()  # Lấy tin nhắn bằng giọng nói
+                            if message_to_send is None:
+                                message_to_send = ""
+                            query = message_to_send
+                        elif "phone call" in query:
+                            flag = 'call'
+                        else:
+                            flag = 'video call'
+                        whatsApp(Phone, query, flag, name)
+                elif "youtube" in query:
+                    from backend.feature import PlayYoutube
+                    PlayYoutube(query)
+                else:
+                    from backend.feature import chatBot
+                    chatBot(query)
             else:
-                speak("I heard you say: " + query)
-                print("Command not recognized")
+                speak("No command was given.")
         except Exception as e:
             print(f"Error processing text command: {e}")
             speak("Sorry, I encountered an error processing your command")
@@ -170,6 +180,12 @@ def takeAllCommand(message=None):
         if "open" in query:
             from backend.feature import openCommand
             openCommand(query)
+        elif "send message to" in query and "on facebook" in query:
+            from backend.feature import facebookMessage
+            facebookMessage(query)
+        elif "find" in query and "on facebook" in query:
+            from backend.feature import facebookSearch
+            facebookSearch(query)
         elif "send message" in query or "phone call" in query or "video call" in query:
             print("Processing contact command")
             from backend.feature import findContact, whatsApp
@@ -198,4 +214,4 @@ def takeAllCommand(message=None):
         print(f"Error processing voice command: {e}")
         speak("Sorry, I encountered an error processing your command")
     
-    eel.ShowHood()  # Hiển thị lại giao diện chính
+    eel.ShowHood()  # Hiển thị lại giao diện chính|

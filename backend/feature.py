@@ -7,6 +7,7 @@ import subprocess
 import time
 import webbrowser
 import eel
+from hugchat import hugchat 
 import pvporcupine
 import pyaudio
 import pyautogui
@@ -14,7 +15,7 @@ import pywhatkit as kit
 import pygame
 from backend.config import ASSISTANT_NAME
 from backend.command import speak
-from backend.helper import extract_yt_term, remove_words
+from backend.helper import extract_yt_term, remove_words, extract_fb_term
 
 conn = sqlite3.connect("jarvis.db")
 cursor = conn.cursor()
@@ -193,3 +194,86 @@ def whatsApp(Phone, message, flag, name):
 
     pyautogui.hotkey('enter')
     speak(jarvis_message)
+
+def facebookSearch(query):
+    search_term = extract_fb_term(query, "find")
+    if search_term:
+        speak(f"Searching for {search_term} on Facebook")
+        # Construct Facebook search URL
+        search_url = f"https://www.facebook.com/search/top?q={quote(search_term)}"
+        webbrowser.open(search_url)
+    else:
+        speak("I couldn't understand who to search for on Facebook")
+
+def facebookMessage(query):
+    contact_name = extract_fb_term(query, "message")
+    if contact_name:
+        speak(f"Opening Facebook Messenger to message {contact_name}")
+        
+        # First open Facebook Messenger
+        webbrowser.open("https://www.facebook.com/messages")
+        time.sleep(7)  # Wait for page to load
+        
+        try:
+            # Focus on the browser window
+            screen_width, screen_height = pyautogui.size()
+            pyautogui.click(screen_width//2, screen_height//2)
+            time.sleep(1)
+            
+            # Look for the "Tìm kiếm trên Messenger" search box
+            # Instead of using fixed coordinates, try to tab to the search field
+            # or use the shortcut to focus on search
+            
+            # Option 1: Use the search box in the left sidebar
+            # From your screenshot, I can see this field with "Tìm kiếm trên Messenger" text
+            search_area_x = 150  # Approximate x coordinate of search area
+            search_area_y = 250  # Updated y coordinate based on your screenshot
+            
+            pyautogui.click(search_area_x, search_area_y)
+            time.sleep(1)
+            
+            # Clear any existing text and type contact name
+            pyautogui.hotkey('ctrl', 'a')
+            pyautogui.press('delete')
+            time.sleep(0.5)
+            pyautogui.write(contact_name)
+            time.sleep(2)
+            
+            # Navigate to SECOND result instead of first
+            pyautogui.press('down')  # First down press
+            time.sleep(0.5)
+            pyautogui.press('down')  # Second down press to get to the second option
+            time.sleep(1)
+            pyautogui.press('enter')
+            time.sleep(2)
+            
+            # Ask for message content
+            speak("What message would you like to send?")
+            message_to_send = takecommand()
+            
+            if message_to_send:
+                pyautogui.write(message_to_send)
+                time.sleep(1)
+                pyautogui.press('enter')
+                speak(f"Message sent to {contact_name}")
+            else:
+                speak("No message was provided")
+        except Exception as e:
+            print(f"Error in Facebook messaging: {e}")
+            speak("I encountered an error while trying to send a Facebook message")
+    else:
+        speak("I couldn't understand who to message on Facebook")
+
+# Import takecommand for the Facebook message function
+from backend.command import takecommand
+
+
+def chatBot(query):
+    user_input = query.lower()
+    chatbot = hugchat.ChatBot(cookie_path="backend\cookie.json")
+    id = chatbot.new_conversation()
+    chatbot.change_conversation(id)
+    response =  chatbot.chat(user_input)
+    print(response)
+    speak(response)
+    return response

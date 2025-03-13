@@ -279,3 +279,35 @@ body {
       transform: rotate(360deg);
     }
 }
+
+
+.chat-canvas{
+  background-color: #19191982
+}
+
+.receiver_message{
+  padding: 8px;
+  border: 2px solid cyan;
+  border-radius: 0px 15px 15px 20px;
+  width: auto;
+  color: white;
+  background-color: #0dcaf014;
+}
+
+.sender_message{
+  padding: 8px;
+  border: 1px solid #00fff7e3;
+  border-radius: 15px 15px 0px 20px;
+  width: auto;
+  color: white;
+  background-color: #009e96;
+}
+.width-size{
+  max-width: 80%;
+  width: auto;
+}
+
+.btn-close {
+  background-color: #00ffd5;
+  border-radius: 50%;
+}

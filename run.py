@@ -1,6 +1,5 @@
 import multiprocessing
 
-
 def startJarvis():
     print ("Process 1 Starting...")
     from main import start
@@ -24,5 +23,3 @@ if __name__ == "__main__":
         process2.join()
         
     print("System is terminated.")
-
-    # 1:59:43

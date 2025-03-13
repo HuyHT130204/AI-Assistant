@@ -41,10 +41,10 @@ python run.py
 - 🔹SQLite (Data about contact, links, app, ...)
 
 ## 🎯 Future Directions
-✨ **Multi-language voice support** 🌍
-✨ **Develop emotion recognition capabilities through voice** 🎭
-✨ **Improve AI chatbot for more natural responses** 🤖
-✨ **Upgrade Face Authentication with more advanced AI** 🛡️
+- ✨ **Multi-language voice support** 🌍
+- ✨ **Develop emotion recognition capabilities through voice** 🎭
+- ✨ **Improve AI chatbot for more natural responses** 🤖
+- ✨ **Upgrade Face Authentication with more advanced AI** 🛡️
 
 ## 🎉 Get Started Now!
 ⚡ **Experience Smart Virtual Assistant today!**

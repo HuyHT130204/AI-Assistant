@@ -19,55 +19,240 @@
       type="text/javascript"
     ></script>
     <link rel="stylesheet" href="assets/vendore/texllate/animate.css" />
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./stylesheets/identify.css">
 </head>
 <body>
     <div class="container">
-        <section id="Oval" class="mb-4">
-            <div class="row">
-                <div class="col-md-1"></div>
-                <div class="col-md-10">
-                    <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
-                        <canvas id="canvasOne" width="700" height="420" style="position: absolute;"></canvas>
-                        <div class="JarvisHood">
-                            <div class="square">
-                                <span class="circle"></span>
-                                <span class="circle"></span>
-                                <span class="circle"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <h4 class="text-light text text-center">Ask me anything</h4>
-
-                    <div class="col-md-12 mt-4 pt-4">
-                        <div class="text-center">
-                        <div id="TextInput" class="d-flex">
-                            <input
-                            type="text"
-                            id="chatbox"
-                            name="chatbox"
-                            placeholder="Ask me anything..."
-                            class="input-field"
-                            />
-                            <button id="SendBtn" class="glow-on-hover" hidden>
-                            <i class="bi bi-send"></i>
-                            </button>
-                            <button id="MicBtn" class="glow-on-hover">
-                            <i class="bi bi-mic"></i>
-                            </button>
-                            <button id="ChatBtn" class="glow-on-hover">
-                            <i class="bi bi-chat-dots"></i>
-                            </button>
-                            <button id="SettingBtn" class="glow-on-hover">
-                            <i class="bi bi-gear-wide-connected"></i>
-                            </button>
-                        </div>
-                        </div>
-                    </div>
+      <section id="Start">
+        <div class="row">
+          <div class="col-lg-12">
+            <div
+              class="d-flex justify-content-center align-items-center universe-background"
+              style="height: 80vh; position: relative; overflow: hidden;"
+            >
+              <!-- Enhanced Universe Background -->
+              <div class="stars-deep"></div>
+              <div class="stars-mid"></div>
+              <div class="stars-near"></div>
+              <div class="nebula"></div>
+              
+              <!-- Enhanced Solar System with Planets -->
+              <div class="solar-system">
+                <div class="sun">
+                  <div class="sun-glow"></div>
                 </div>
-                <div class="col-md-1"></div>
+                
+                <!-- Mercury Orbit and Planet -->
+                <div class="orbit mercury-orbit">
+                  <div class="planet mercury">
+                    <div class="planet-atmosphere mercury-atmosphere"></div>
+                  </div>
+                </div>
+                
+                <!-- Venus Orbit and Planet -->
+                <div class="orbit venus-orbit">
+                  <div class="planet venus">
+                    <div class="planet-atmosphere venus-atmosphere"></div>
+                  </div>
+                </div>
+                
+                <!-- Earth Orbit and Planet -->
+                <div class="orbit earth-orbit">
+                  <div class="planet earth">
+                    <div class="planet-atmosphere earth-atmosphere"></div>
+                    <div class="moon-orbit">
+                      <div class="moon"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Mars Orbit and Planet -->
+                <div class="orbit mars-orbit">
+                  <div class="planet mars">
+                    <div class="planet-atmosphere mars-atmosphere"></div>
+                  </div>
+                </div>
+                
+                <!-- Asteroid Belt -->
+                <div class="asteroid-belt">
+                  <div class="asteroid a1"></div>
+                  <div class="asteroid a2"></div>
+                  <div class="asteroid a3"></div>
+                  <div class="asteroid a4"></div>
+                  <div class="asteroid a5"></div>
+                  <div class="asteroid a6"></div>
+                  <div class="asteroid a7"></div>
+                  <div class="asteroid a8"></div>
+                </div>
+                
+                <!-- Jupiter Orbit and Planet -->
+                <div class="orbit jupiter-orbit">
+                  <div class="planet jupiter">
+                    <div class="planet-atmosphere jupiter-atmosphere"></div>
+                    <div class="jupiter-bands"></div>
+                  </div>
+                </div>
+                
+                <!-- Saturn Orbit and Planet -->
+                <div class="orbit saturn-orbit">
+                  <div class="planet saturn">
+                    <div class="planet-atmosphere saturn-atmosphere"></div>
+                    <div class="saturn-ring-system">
+                      <div class="saturn-ring ring1"></div>
+                      <div class="saturn-ring ring2"></div>
+                      <div class="saturn-ring ring3"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div style="z-index: 10; position: relative;">
+                <div id="Loader" class="mb-4 position-relative">
+                  <!-- Enhanced Futuristic Circular Loader -->
+                  <div class="quantum-core">
+                    <div class="data-stream">
+                      <div class="data-particle p1"></div>
+                      <div class="data-particle p2"></div>
+                      <div class="data-particle p3"></div>
+                      <div class="data-particle p4"></div>
+                      <div class="data-particle p5"></div>
+                      <div class="data-particle p6"></div>
+                      <div class="data-particle p7"></div>
+                      <div class="data-particle p8"></div>
+                    </div>
+                    <div class="scan-beams">
+                      <div class="scan-beam horizontal"></div>
+                      <div class="scan-beam vertical"></div>
+                      <div class="scan-beam diagonal1"></div>
+                      <div class="scan-beam diagonal2"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="FaceAuth" class="mb-4 advanced-scanner" hidden>
+                  <div class="scanner-frame">
+                    <div class="scanner-grid"></div>
+                    <div class="scan-beam"></div>
+                    <div class="scan-target">
+                      <div class="target-ring ring1"></div>
+                      <div class="target-ring ring2"></div>
+                      <div class="target-crosshair"></div>
+                    </div>
+                    <div class="scan-corner top-left"></div>
+                    <div class="scan-corner top-right"></div>
+                    <div class="scan-corner bottom-left"></div>
+                    <div class="scan-corner bottom-right"></div>
+                    <div class="scan-data">
+                      <div class="data-line"></div>
+                      <div class="data-line"></div>
+                      <div class="data-line"></div>
+                    </div>
+                  </div>
+                </div>
+                
+                <div id="FaceAuthSuccess" class="mb-4 quantum-success" hidden>
+                  <div class="success-field">
+                    <div class="success-core"></div>
+                    <div class="success-glow"></div>
+                    <div class="success-rings">
+                      <div class="success-ring ring1"></div>
+                      <div class="success-ring ring2"></div>
+                      <div class="success-ring ring3"></div>
+                    </div>
+                    <div class="success-particles">
+                      <div class="particle p1"></div>
+                      <div class="particle p2"></div>
+                      <div class="particle p3"></div>
+                      <div class="particle p4"></div>
+                      <div class="particle p5"></div>
+                    </div>
+                    <div class="success-checkmark"></div>
+                  </div>
+                </div>
+                
+                <div id="HelloGreet" class="mb-4 cosmic-greeting" hidden>
+                  <div class="greeting-nebula">
+                    <div class="greeting-star"></div>
+                    <div class="greeting-waves">
+                      <div class="greeting-wave w1"></div>
+                      <div class="greeting-wave w2"></div>
+                      <div class="greeting-wave w3"></div>
+                    </div>
+                    <div class="greeting-particles">
+                      <div class="greeting-particle p1"></div>
+                      <div class="greeting-particle p2"></div>
+                      <div class="greeting-particle p3"></div>
+                      <div class="greeting-particle p4"></div>
+                      <div class="greeting-particle p5"></div>
+                      <div class="greeting-particle p6"></div>
+                    </div>
+                    <div class="greeting-cosmic-dust"></div>
+                  </div>
+                </div>
+              </div>
             </div>
-        </section>
+            
+            <div class="d-flex justify-content-center align-items-center position-relative">
+              <h1 id="WishMessage" class="text-center mt-4 cosmic-message">
+                <span class="cosmic-text">Initializing...</span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section id="Oval" class="mb-4">
+          <div class="row">
+              <div class="col-md-1"></div>
+              <div class="col-md-10">
+                  <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
+                      <canvas id="canvasOne" width="700" height="420" style="position: absolute;"></canvas>
+                      <div class="JarvisHood">
+                          <div class="square">
+                              <span class="circle"></span>
+                              <span class="circle"></span>
+                              <span class="circle"></span>
+                          </div>
+                      </div>
+                  </div>
+                  <h4 class="text-light text text-center">Ask me anything</h4>
+
+                  <div class="col-md-12 mt-4 pt-4">
+                      <div class="text-center">
+                      <div id="TextInput" class="d-flex">
+                          <input
+                          type="text"
+                          id="chatbox"
+                          name="chatbox"
+                          placeholder="Ask me anything..."
+                          class="input-field"
+                          />
+                          <button id="SendBtn" class="glow-on-hover" hidden>
+                          <i class="bi bi-send"></i>
+                          </button>
+                          <button id="MicBtn" class="glow-on-hover">
+                          <i class="bi bi-mic"></i>
+                          </button>
+                          <button 
+                            id="ChatBtn" 
+                            class="glow-on-hover" 
+                            data-bs-toggle="offcanvas" 
+                            data-bs-target="#offcanvasScrolling" 
+                            aria-controls="offcanvasScrolling"
+                          >
+                          <i class="bi bi-chat-dots"></i>
+                          </button>
+                          <button id="SettingBtn" class="glow-on-hover">
+                          <i class="bi bi-gear-wide-connected"></i>
+                          </button>
+                      </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-1"></div>
+          </div>
+      </section>
 
         <div id="SiriWave" class="mb-4">
             <div class="container">
@@ -89,6 +274,29 @@
             </div>
         </div>
     </div>
+
+    <div
+        class="offcanvas offcanvas-start chat-canvas"
+        data-bs-scroll="true"
+        data-bs-backdrop="false"
+        tabindex="-1"
+        id="offcanvasScrolling"
+        aria-labelledby="offcanvasScrollingLabel"
+    >
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title text-white" id="offcanvasScrollingLabel">
+                Chats
+            </h5>
+            <button
+                type="button"
+                class="btn-close text-reset"
+                data-bs-dismiss="offcanvas"
+                aria-label="Close"
+            ></button>
+        </div>
+        <div id="chat-canvas-body" class="offcanvas-body"></div>
+    </div>
+
     <!--Jquery  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -96,6 +304,9 @@
 
     <!-- Siri wave -->
     <script src="https://unpkg.com/siriwave/dist/siriwave.umd.min.js"></script>
+
+    <!-- Lotties File -->
+    <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="main.js"></script>

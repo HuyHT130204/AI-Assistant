@@ -4,10 +4,43 @@ import sqlite3
 conn = sqlite3.connect("jarvis.db")
 cursor = conn.cursor()
 
+# Create system command table
 query = "CREATE TABLE IF NOT EXISTS sys_command(id integer primary key, name VARCHAR(100), path VARCHAR(1000))"
 cursor.execute(query)
+
+# Create web command table
 query = "CREATE TABLE IF NOT EXISTS web_command(id integer primary key, name VARCHAR(100), url VARCHAR(1000))"
 cursor.execute(query)
+
+# Create contacts table if it doesn't exist
+query = "CREATE TABLE IF NOT EXISTS contacts(id integer primary key, name VARCHAR(100), Phone VARCHAR(20))"
+cursor.execute(query)
+
+# Create facebook contacts table if it doesn't exist
+query = """
+CREATE TABLE IF NOT EXISTS facebook_contacts(
+    id integer primary key, 
+    name VARCHAR(100), 
+    profile_url VARCHAR(1000),
+    last_messaged TIMESTAMP
+)
+"""
+cursor.execute(query)
+
+# Insert Facebook as a web command if it doesn't exist
+cursor.execute("SELECT COUNT(*) FROM web_command WHERE name = 'facebook'")
+if cursor.fetchone()[0] == 0:
+    cursor.execute("INSERT INTO web_command (name, url) VALUES (?, ?)", 
+                  ("facebook", "https://www.facebook.com/"))
+    
+# Insert Facebook Messenger as a web command if it doesn't exist
+cursor.execute("SELECT COUNT(*) FROM web_command WHERE name = 'messenger'")
+if cursor.fetchone()[0] == 0:
+    cursor.execute("INSERT INTO web_command (name, url) VALUES (?, ?)", 
+                  ("messenger", "https://www.facebook.com/messages/"))
+
+# Commit changes to database
+conn.commit()
 
 # query = "INSERT INTO sys_command VALUES (null,'obs', 'C:\\Program Files\\obs-studio\\bin\\64bit\\obs64.exe')"
 # cursor.execute(query)
@@ -38,9 +71,9 @@ cursor.execute(query)
 
 # print("Data inserted successfully!")
 
-# query = "INSERT INTO contacts VALUES (null,'HuyThanh', '0377974312', 'null')"
-# cursor.execute(query)
-# conn.commit() 
+query = "INSERT INTO contacts VALUES (null,'Nhà ❤️', '0377974312', 'null')"
+cursor.execute(query)
+conn.commit() 
 
 # query = 'HuyThanh'
 # query = query.strip().lower()  # Added parentheses to call the method

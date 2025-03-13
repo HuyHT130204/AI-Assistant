@@ -34,12 +34,12 @@ python run.py
 ```
  
 ## 🛠️ Technologies Used
--🔹 Python (Flask, SpeechRecognition, HuggingFace API, pyttsx3)
--🔹 OpenCV, DeepFace (Face Authentication)
--🔹 pyttsx3 (Voice recognition and output without internet connection)
--🔹 HuggingChat API (Intelligent conversation processing)
--🔹 Twilio API (AI-powered calls)
--🔹 SQLite (Chat history storage)
+- 🔹Python (Flask, SpeechRecognition, HuggingFace API, pyttsx3)
+- 🔹OpenCV, DeepFace (Face Authentication)
+- 🔹pyttsx3 (Voice recognition and output without internet connection)
+- 🔹HuggingChat API (Intelligent conversation processing)
+- 🔹Twilio API (AI-powered calls)
+- 🔹SQLite (Chat history storage)
 
 ## 🎯 Future Directions
 ✨ **Multi-language voice support** 🌍
@@ -50,5 +50,5 @@ python run.py
 ## 🎉 Get Started Now!
 ⚡ **Experience Smart Virtual Assistant today!**
 
-📧 **Contact:** [huyht1302@gmail.com](mailto:huyht1302@gmail.com) or [chaunganpenny@gmail.com](mailto:chaunganpenny@gmail.com)
-🌍 **Website:** (comming soon)
+- 📧 **Contact:** [huyht1302@gmail.com](mailto:huyht1302@gmail.com) or [chaunganpenny@gmail.com](mailto:chaunganpenny@gmail.com)
+- 🌍 **Website:** (comming soon)

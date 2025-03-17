@@ -59,16 +59,25 @@ $(document).ready(function () {
     $("#HelloGreet").attr("hidden", false);
   }
 
-  // Hide Start Page and display blob
   eel.expose(hideStart);
   function hideStart() {
-    $("#Start").attr("hidden", true);
-
-    setTimeout(function () {
-      $("#Oval").addClass("animate__animated animate__zoomIn");
-    }, 1000);
-    setTimeout(function () {
-      $("#Oval").attr("hidden", false);
-    }, 1000);
+      $("#Start").attr("hidden", true);
+  }
+  
+  // Hide Start Page and display blob
+  eel.expose(showMainInterface);
+  function showMainInterface() {
+      // Ẩn tất cả các phần không cần thiết
+      $("#Loader").attr("hidden", true);
+      $("#FaceAuth").attr("hidden", true);
+      $("#FaceAuthSuccess").attr("hidden", true);
+      $("#HelloGreet").attr("hidden", true);
+      $("#Start").attr("hidden", true);
+      
+      // Hiển thị giao diện chính với hiệu ứng
+      setTimeout(function () {
+        $("#Oval").addClass("animate__animated animate__zoomIn");
+        $("#Oval").attr("hidden", false);
+      }, 500);
   }
 });

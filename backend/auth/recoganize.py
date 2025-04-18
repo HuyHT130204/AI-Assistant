@@ -33,6 +33,9 @@ def AuthenticateFace():
     minH = 0.1*cam.get(4)
 
     # flag = True
+    
+    # Thiết lập ngưỡng độ chính xác tối thiểu (50%)
+    accuracy_threshold = 45
 
     while True:
 
@@ -54,20 +57,23 @@ def AuthenticateFace():
             cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
 
             # to predict on every single image
-            id, accuracy = recognizer.predict(converted_image[y:y+h, x:x+w])
+            id, confidence = recognizer.predict(converted_image[y:y+h, x:x+w])
+            
+            # Chuyển đổi confidence thành độ chính xác (accuracy)
+            accuracy = 100 - confidence
 
-            # Check if accuracy is less them 100 ==> "0" is perfect match
-            if (accuracy < 100):
+            # Kiểm tra nếu độ chính xác lớn hơn ngưỡng đã thiết lập
+            if (accuracy > accuracy_threshold):
                 id = names[id]
-                accuracy = "  {0}%".format(round(100 - accuracy))
+                accuracy_str = "  {0}%".format(round(accuracy))
                 flag = 1
             else:
                 id = "unknown"
-                accuracy = "  {0}%".format(round(100 - accuracy))
+                accuracy_str = "  {0}%".format(round(accuracy))
                 flag = 0
 
             cv2.putText(img, str(id), (x+5, y-5), font, 1, (255, 255, 255), 2)
-            cv2.putText(img, str(accuracy), (x+5, y+h-5),
+            cv2.putText(img, str(accuracy_str), (x+5, y+h-5),
                         font, 1, (255, 255, 0), 1)
 
         cv2.imshow('camera', img)
@@ -76,11 +82,30 @@ def AuthenticateFace():
         if k == 27:
             break
         if flag == 1:
-            break
+            # Thêm một khoảng delay nhỏ để xác nhận khuôn mặt ổn định
+            time.sleep(0.5)
+            # Kiểm tra lại lần nữa để chắc chắn
+            ret, img = cam.read()
+            if ret:
+                converted_image = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+                faces = faceCascade.detectMultiScale(
+                    converted_image,
+                    scaleFactor=1.2,
+                    minNeighbors=5,
+                    minSize=(int(minW), int(minH)),
+                )
+                
+                if len(faces) > 0:
+                    x, y, w, h = faces[0]
+                    id, confidence = recognizer.predict(converted_image[y:y+h, x:x+w])
+                    accuracy = 100 - confidence
+                    if accuracy > accuracy_threshold:
+                        break
+                    else:
+                        flag = 0  # Đặt lại flag nếu lần kiểm tra thứ hai thất bại
             
 
     # Do a bit of cleanup
-    
     cam.release()
     cv2.destroyAllWindows()
     return flag

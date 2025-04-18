@@ -275,6 +275,20 @@
         </div>
     </div>
 
+    <!-- URL Template Input Dialog -->
+    <div id="url-template-dialog" class="dialog-modal" style="display: none;">
+      <div class="dialog-content">
+          <h3 id="dialog-title">Enter URL Template</h3>
+          <p id="dialog-description">Please enter the URL template. Use {query} where the search term should go.</p>
+          <input type="text" id="url-template-input" placeholder="https://example.com/search?q={query}" class="full-width">
+          <div class="dialog-buttons">
+              <button id="submit-template" class="btn primary-btn">Submit</button>
+              <button id="cancel-template" class="btn secondary-btn">Cancel</button>
+          </div>
+          <div id="url-hint">Hint</div>
+      </div>
+    </div>
+
     <div
         class="offcanvas offcanvas-start chat-canvas"
         data-bs-scroll="true"

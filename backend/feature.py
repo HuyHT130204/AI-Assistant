@@ -13,8 +13,9 @@ import pyaudio
 import pyautogui
 import pywhatkit as kit
 import pygame
+import sys  # Thêm import sys
 from backend.config import ASSISTANT_NAME
-from backend.command import speak
+from backend.command import speak, shutdown_app
 from backend.helper import extract_yt_term, remove_words, extract_fb_term
 
 conn = sqlite3.connect("jarvis.db")
@@ -72,36 +73,91 @@ def PlayYoutube(query):
     kit.playonyt(search_term)
 
 def hotword():
-    porcupine=None
-    paud=None
-    audio_stream=None
+    porcupine = None
+    paud = None
+    audio_stream = None
     try:
-       
-        # pre trained keywords    
-        porcupine=pvporcupine.create(keywords=["jarvis","alexa"]) 
-        paud=pyaudio.PyAudio()
-        audio_stream=paud.open(rate=porcupine.sample_rate,channels=1,format=pyaudio.paInt16,input=True,frames_per_buffer=porcupine.frame_length)
+        # Path to your custom "Shutdown" PPN file
+        shutdown_ppn_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'backend', 'Shutdown_en_windows_v3_0_0.ppn')
         
-        # loop for streaming
+        # Debug output for file path
+        print(f"Looking for Shutdown PPF file at: {shutdown_ppn_path}")
+        print(f"File exists: {os.path.exists(shutdown_ppn_path)}")
+        
+        if not os.path.exists(shutdown_ppn_path):
+            print("Error: Shutdown PPF file not found! Cannot continue.")
+            return
+        
+        # Only use the custom shutdown keyword
+        keyword_names = ["shutdown"]
+        
+        # Create Porcupine instance with ONLY the custom shutdown keyword
+        porcupine = pvporcupine.create(
+            access_key="8j1GOv8pGZ91czRvzKOcGdBHr3Em72a0PutpNdiJw3aTF/8vLFmSEA==",
+            keywords=[],  # Empty list for standard keywords
+            keyword_paths=[shutdown_ppn_path]  # Only use custom shutdown keyword
+        )
+        
+        print(f"Porcupine initialized with keywords: {keyword_names}")
+        
+        paud = pyaudio.PyAudio()
+        audio_stream = paud.open(
+            rate=porcupine.sample_rate,
+            channels=1,
+            format=pyaudio.paInt16,
+            input=True,
+            frames_per_buffer=porcupine.frame_length
+        )
+        
+        print("Hotword detection started. Listening for shutdown keyword...")
+        
+        # Loop for streaming
         while True:
-            keyword=audio_stream.read(porcupine.frame_length)
-            keyword=struct.unpack_from("h"*porcupine.frame_length,keyword)
+            keyword = audio_stream.read(porcupine.frame_length)
+            keyword = struct.unpack_from("h" * porcupine.frame_length, keyword)
 
-            # processing keyword comes from mic 
-            keyword_index=porcupine.process(keyword)
+            # Processing keyword comes from mic 
+            keyword_index = porcupine.process(keyword)
 
-            # checking first keyword detetcted for not
-            if keyword_index>=0:
-                print("hotword detected")
-
-                # pressing shorcut key win+j
-                import pyautogui as autogui
-                autogui.keyDown("win")
-                autogui.press("j")
-                time.sleep(2)
-                autogui.keyUp("win")
+            # In the hotword function in paste-3.txt, modify the shutdown code:
+            if keyword_index >= 0:
+                print(f"Shutdown hotword detected! (index {keyword_index})")
+                print("Shutdown command confirmed! Exiting application...")
                 
-    except:
+                # Clean up resources before shutdown
+                if audio_stream is not None:
+                    audio_stream.close()
+                if paud is not None:
+                    paud.terminate()
+                if porcupine is not None:
+                    porcupine.delete()
+                
+                # Speak goodbye message directly without using eel functions
+                try:
+                    import pyttsx3
+                    engine = pyttsx3.init('sapi5')
+                    engine.say("See you soon Boss")
+                    engine.runAndWait()
+                except:
+                    pass
+                
+                # Try calling closeWindow through eel
+                try:
+                    eel.closeWindow()
+                except:
+                    pass
+                
+                # Force immediate exit
+                time.sleep(1)
+                os._exit(0)  # Most aggressive exit method
+                
+    except Exception as e:
+        print(f"Error in hotword detection: {e}")
+        import traceback
+        traceback.print_exc()
+    finally:
+        # This should only run if the main loop exits without shutdown being triggered
+        print("Cleaning up hotword detection resources...")
         if porcupine is not None:
             porcupine.delete()
         if audio_stream is not None:
@@ -156,8 +212,6 @@ def findContact(query):
         return 0, 0
     
 def whatsApp(Phone, message, flag, name):
-    
-
     if flag == 'message':
         target_tab = 12
         jarvis_message = "message send successfully to "+name
@@ -171,7 +225,6 @@ def whatsApp(Phone, message, flag, name):
         target_tab = 6
         message = ''
         jarvis_message = "staring video call with "+name
-
 
     # Encode the message for URL
     encoded_message = quote(message)
@@ -249,6 +302,8 @@ def facebookMessage(query):
             
             # Ask for message content
             speak("What message would you like to send?")
+            # Import takecommand for the Facebook message function
+            from backend.command import takecommand
             message_to_send = takecommand()
             
             if message_to_send:
@@ -264,16 +319,12 @@ def facebookMessage(query):
     else:
         speak("I couldn't understand who to message on Facebook")
 
-# Import takecommand for the Facebook message function
-from backend.command import takecommand
-
-
 def chatBot(query):
     user_input = query.lower()
     chatbot = hugchat.ChatBot(cookie_path="backend\cookie.json")
     id = chatbot.new_conversation()
     chatbot.change_conversation(id)
-    response =  chatbot.chat(user_input)
+    response = chatbot.chat(user_input)
     print(response)
     speak(response)
     return response

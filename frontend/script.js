@@ -349,3 +349,113 @@ $(function () {
 		}
 	});
 });
+
+
+// Add this to your main JavaScript file
+eel.expose(showURLTemplateInput);
+function showURLTemplateInput(commandType, platform) {
+    // Update dialog content
+    document.getElementById('dialog-title').textContent = `Enter URL Template for ${platform}`;
+    document.getElementById('dialog-description').textContent = 
+        `Please enter the URL for ${commandType}ing on ${platform}. The system will automatically add a query parameter if needed.`;
+    
+    // Add a hint for the URL format
+    document.getElementById('url-hint').textContent = 
+        "Example: https://nhac.vn/ or https://example.com/search?term={query}";
+    
+    // Clear previous input
+    document.getElementById('url-template-input').value = '';
+    
+    // Show the dialog
+    document.getElementById('url-template-dialog').style.display = 'flex';
+    
+    // Store command type and platform as data attributes
+    document.getElementById('submit-template').setAttribute('data-command-type', commandType);
+    document.getElementById('submit-template').setAttribute('data-platform', platform);
+    
+    // Focus on the input
+    document.getElementById('url-template-input').focus();
+}
+
+// Add event listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Submit button event
+    document.getElementById('submit-template').addEventListener('click', function() {
+        const urlTemplate = document.getElementById('url-template-input').value;
+        const commandType = this.getAttribute('data-command-type');
+        const platform = this.getAttribute('data-platform');
+        
+        // Hide the dialog
+        document.getElementById('url-template-dialog').style.display = 'none';
+        
+        // Send template back to Python
+        eel.receive_url_template(commandType, platform, urlTemplate);
+    });
+    
+    // Cancel button event
+    document.getElementById('cancel-template').addEventListener('click', function() {
+        // Hide the dialog
+        document.getElementById('url-template-dialog').style.display = 'none';
+        
+        // Notify Python
+        eel.cancel_teaching();
+    });
+    
+    // Enter key in input field
+    document.getElementById('url-template-input').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('submit-template').click();
+        }
+    });
+});
+
+
+eel.expose(closeWindow);
+function closeWindow() {
+    console.log("SHUTDOWN: Forcing application close...");
+    
+    // Kill all ongoing processes and listeners
+    if (typeof timer !== 'undefined') {
+        clearInterval(timer);
+    }
+    
+    // Remove all event listeners to prevent any callbacks
+    window.onbeforeunload = null;
+    
+    // Hiển thị thông báo rõ ràng cho người dùng
+    document.body.innerHTML = "<div style='position:fixed; top:0; left:0; right:0; bottom:0; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; font-size:24px;'>Shutting down...</div>";
+    
+    // Gửi xác nhận ngược lại Python để tiếp tục quá trình tắt
+    try {
+        eel.confirm_shutdown();
+    } catch(e) {
+        console.error("Error confirming shutdown:", e);
+    }
+    
+    // Thử các phương pháp đóng cửa sổ một cách mạnh mẽ hơn
+    setTimeout(function() {
+        // Try multiple closing methods with short intervals
+        try {
+            window.open('', '_self').close();
+        } catch(e) {}
+        
+        setTimeout(function() {
+            try {
+                window.close();
+            } catch(e) {}
+            
+            setTimeout(function() {
+                // For Edge, this might help
+                window.top.close();
+            }, 100);
+        }, 100);
+    }, 100);
+    
+    return true;
+}
+
+// Allow programmatic closing for Edge
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle Edge browser closing permission
+    window.onbeforeunload = null;
+});

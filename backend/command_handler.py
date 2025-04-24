@@ -1,5 +1,3 @@
-# backend/command_handler.py
-
 import re
 import webbrowser
 from urllib.parse import quote
@@ -11,30 +9,172 @@ import eel
 class CommandHandler:
     def __init__(self):
         self.learner = CommandLearner()
+        # Command type patterns with keywords
+        self.command_types = {
+            "open": ["open", "launch", "start", "run"],
+            "search": ["search", "find", "look for", "lookup"],
+            "play": ["play", "watch", "listen to"],
+            "communication": ["send message", "call", "phone call", "video call"],
+            "system": ["shutdown", "restart", "update", "install", "backup", "restore"],
+            "info": ["show", "list", "display", "give me", "tell me about"],
+            "teaching": ["teach you", "learn how to"],
+            "help": ["what can you do", "help", "show commands", "show features"]
+        }
+        
+        # Common question patterns
+        self.question_patterns = [
+            r"^(what|who|when|where|why|how)\s.+\?$",
+            r"^(is|are|was|were|do|does|did|can|could|would|should|will|have|has|had)\s.+\?$",
+            r"^(what|who|when|where|why|how)\s.+",
+            r"^can you tell me\s.+",
+            r"^tell me\s.+",
+            r"^do you know\s.+",
+        ]
+        
+        # Load specific command database patterns
+        self.load_command_patterns()
+        
+    def load_command_patterns(self):
+        """Load common command patterns from database"""
+        self.db_commands = {}
+        try:
+            # Try to get common commands from database for quick matching
+            import sqlite3
+            conn = sqlite3.connect("jarvis.db")
+            cursor = conn.cursor()
+            cursor.execute("SELECT command_text, function_name FROM command_dataset")
+            for cmd_text, func_name in cursor.fetchall():
+                self.db_commands[cmd_text.lower()] = func_name
+            conn.close()
+        except Exception as e:
+            print(f"Error loading command patterns: {e}")
+            self.db_commands = {}
         
     def handle_command(self, query):
-        """Main function to handle all types of commands"""
+        """Main entry point for handling all user input"""
         if not query:
             return False
             
-        query = query.lower()
-        print(f"Handling command: {query}")
+        query = query.lower().strip()
+        print(f"Handling input: {query}")
         
-        # First try with the command learner
+        # First check if it's an exact match with a database command
+        if query in self.db_commands:
+            print(f"Exact command match found in database: {self.db_commands[query]}")
+            return self.learner.handle_dataset_command(query)
+        
+        # Check for exact command patterns
+        if self._is_direct_command(query):
+            return self._process_command(query)
+        
+        # Classify the input more thoroughly
+        input_type = self._classify_input(query)
+        print(f"Input classified as: {input_type}")
+        
+        # Process based on classification
+        if input_type == "question":
+            chatBot(query)
+            return True
+        else:
+            return self._process_command(query)
+    
+    def _is_direct_command(self, query):
+        """Check if the query is directly matching a command pattern"""
+        # Check for system commands
+        if query == "shutdown":
+            return True
+            
+        # Check command prefixes
+        for cmd_type, keywords in self.command_types.items():
+            for keyword in keywords:
+                if query.startswith(f"{keyword} "):
+                    return True
+                    
+        # Check platform-specific commands
+        platform_indicators = [
+            "on google", "on youtube", "on facebook", "on spotify", 
+            "on instagram", "on twitter", "open", "play", "search for"
+        ]
+        
+        for indicator in platform_indicators:
+            if indicator in query:
+                return True
+                
+        return False
+    
+    def _classify_input(self, query):
+        """More robust classification of input as command or question"""
+        # Strip punctuation for better matching
+        clean_query = re.sub(r'[^\w\s]', '', query).strip()
+        
+        # 1. Check for exact command matches in database first
+        for cmd in self.db_commands:
+            if clean_query in cmd or cmd in clean_query:
+                return "command"
+        
+        # 2. Check for command indicators by keyword
+        for cmd_type, keywords in self.command_types.items():
+            for keyword in keywords:
+                # Full phrase match (e.g., "open chrome")
+                if f"{keyword} " in query:
+                    return "command"
+                    
+        # 3. Check for platform-specific commands
+        platform_commands = [
+            "on google", "on youtube", "on facebook", "on spotify", 
+            "to facebook", "to whatsapp", "on instagram"
+        ]
+        
+        for platform in platform_commands:
+            if platform in query:
+                return "command"
+                
+        # 4. Check for question patterns
+        for pattern in self.question_patterns:
+            if re.search(pattern, query):
+                return "question"
+                
+        # 5. Check for question marks
+        if query.endswith("?"):
+            return "question"
+            
+        # 6. Check for Vietnamese-specific commands
+        vn_command_indicators = ["mở", "phát", "tìm", "gọi", "nhắn tin", "tin nhắn"]
+        if any(indicator in query for indicator in vn_command_indicators):
+            return "command"
+        
+        # 7. Check for information/help requests
+        help_indicators = ["what can you do", "help me", "list commands", "show features"]
+        if any(indicator in query for indicator in help_indicators):
+            return "command"
+        
+        # Default handling for ambiguous inputs
+        # If it has command-like structure but no question pattern, treat as command
+        if any(keyword in query for keyword in ["open", "play", "search", "find", "send", "call"]):
+            return "command"
+        
+        # Default to treating as a question for conversational handling
+        return "question"
+            
+    def _process_command(self, query):
+        """Process identified commands with priority order"""
         try:
+            # 1. First try to handle with dataset commands
+            if self.learner.handle_dataset_command(query):
+                return True
+                
+            # 2. Then try with learned commands
             if self.learner.handle_command(query):
                 return True
-        except Exception as e:
-            print(f"Error in command learner: {e}")
-        
-        # Then try with the predefined commands
-        try:
+                
+            # 3. Try with built-in command handlers
+            
             # Teaching commands
             if "teach" in query and "how to" in query:
                 return self._handle_teaching(query)
                 
             # System commands
-            elif "open" in query:
+            elif any(cmd in query for cmd in ["open", "launch", "start", "run"]):
                 openCommand(query)
                 return True
                 
@@ -45,7 +185,7 @@ class CommandHandler:
             elif "find" in query and "on facebook" in query:
                 facebookSearch(query)
                 return True
-            elif "send message" in query or "phone call" in query or "video call" in query:
+            elif any(cmd in query for cmd in ["send message", "phone call", "video call"]):
                 return self._handle_contact_command(query)
                 
             # Media commands
@@ -53,14 +193,13 @@ class CommandHandler:
                 PlayYoutube(query)
                 return True
                 
-            # Information commands
-            elif "what can you do" in query or "help" == query or "show commands" in query:
+            # Help commands
+            elif any(cmd in query for cmd in ["what can you do", "help", "show commands"]):
                 return self._show_capabilities()
                 
-            # If no specific command matched, use chatbot
-            else:
-                chatBot(query)
-                return True
+            # If no command handler matched but it was classified as a command
+            speak("I don't understand that command. Say 'help' to see what I can do.")
+            return False
                 
         except Exception as e:
             print(f"Error processing command: {e}")
@@ -122,7 +261,8 @@ class CommandHandler:
             "I can send messages and make calls to your contacts",
             "I can interact with Facebook to search and message",
             "I can play videos on YouTube",
-            "I can learn new commands when you teach me"
+            "I can learn new commands when you teach me",
+            "I can answer your questions about various topics"
         ]
         
         # Get supported platforms
@@ -145,3 +285,4 @@ class CommandHandler:
             
         speak("\n".join(capabilities))
         return True
+    

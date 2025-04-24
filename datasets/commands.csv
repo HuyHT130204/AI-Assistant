@@ -1,0 +1,989 @@
+,Task/Intent,command
+0,Open Applications,Launch my browser
+1,System Settings,Go to system settings
+2,File Management,Show me the file manager
+3,Web Browsing,Open Google
+4,Media Control,Play some songs
+5,System Shutdown,Shut down the computer
+6,System Information,Show me the system info
+7,File Search,Find my documents
+8,Network Management,Open network settings
+9,Software Installation,Install an application
+10,System Information,What are the details of my system?
+11,Battery Management,How is my battery level?
+12,Task Management,Show me the active tasks
+13,File Management,Can you open the file manager?
+14,File Search,Find a file on my system
+15,Internet Connectivity,Check my network status
+16,Software Installation,Install an app for me
+17,Application Control,Launch the browser
+18,System Settings,Open system preferences
+19,Shutdown/Restart,Restart my computer
+20,Network Management,Can you open my WiFi settings?
+21,Web Browsing,Open a new browser window
+22,Task Management,Show me the list of running apps
+23,System Updates,Check for system updates
+24,File Backup,Can you back up my files?
+25,System Troubleshooting,Can you check for issues on my system?
+26,System Monitoring,Monitor my CPU usage
+27,File Compression,Can you zip my files?
+28,Cloud Storage,Can you upload my files to the cloud?
+29,Application Control,Can you close all my apps?
+30,System Restart,Please restart my system
+31,Device Management,Manage my devices
+32,Printer Management,Check the printer status
+33,Keyboard Shortcuts,Show me the keyboard shortcuts
+34,Clipboard Management,Can you show my clipboard?
+35,Screen Capture,Take a screenshot for me
+36,System Time,What time is it on my system?
+37,Taskbar Management,Can you open the taskbar settings?
+38,Network Troubleshooting,Check my internet connection for issues
+39,Cloud Backup,Sync my files with the cloud
+40,System Information,What is my system's information?
+41,Battery Management,How much battery is left?
+42,Task Management,What tasks are running on my computer?
+43,File Management,Can you open the file explorer?
+44,File Search,Can you search for a document?
+45,Internet Connectivity,How's my internet connection?
+46,Software Installation,Please install this application
+47,Application Control,Open my web browser
+48,System Settings,Open the system preferences for me
+49,Shutdown/Restart,Can you restart my computer?
+50,Opening/Closing Apps,Start the music player
+51,File Browsing,Open my downloads directory
+52,Command Line Operations,Can you list the files here?
+53,File Permissions,Change the permissions for this file
+54,Creating/Editing Files,Create a blank document
+55,Package Management,Install VLC media player
+56,System Updates,Can you update my system?
+57,Managing Users and Groups,Create a new user account
+58,System Logs,Can you show me the log file?
+59,Disk Management,List the partitions on my disk
+60,Network Configuration,Can you connect me to Wi-Fi?
+61,File Sharing,Share a folder over the network
+62,SSH Connections,Log in to my remote machine
+63,Internet Browsing,Open Chrome
+64,VPN Setup,Connect to a VPN
+65,Resource Monitoring,Check my CPU usage
+66,Processes Management,Terminate the Firefox process
+67,Hardware Info,Give me the system specs
+68,Backup and Recovery,Backup all files
+69,Virtualization,Launch a virtual machine
+70,Opening/Closing Apps,Open the music player
+71,File Browsing,Show me my downloads folder
+72,Command Line Operations,List all files in this folder
+73,File Permissions,Give me full control over this file
+74,Creating/Editing Files,Open a new text file
+75,Package Management,Install VLC
+76,System Updates,Update the system
+77,Managing Users and Groups,Add a new user
+78,System Logs,Show me the system log
+79,Disk Management,Show me my disk partitions
+80,Network Configuration,Connect to Wi-Fi
+81,File Sharing,Share this folder with John
+82,SSH Connections,Connect to server X
+83,Internet Browsing,Open Firefox
+84,VPN Setup,Set up a VPN connection
+85,Resource Monitoring,Show me CPU usage
+86,Processes Management,Kill the Firefox process
+87,Hardware Info,What are my system specs?
+88,Backup and Recovery,Backup my files to an external drive
+89,Virtualization,Start a virtual machine
+90,Opening/Closing Apps,Open the music player
+91,Opening/Closing Apps,Close Firefox
+92,File Browsing,Show me my downloads folder
+93,File Browsing,Move this file to Documents
+94,Command Line Operations,List all files in this folder
+95,File Permissions,Give me full control over this file
+96,Creating/Editing Files,Open a new text file
+97,Package Management,Install VLC
+98,Package Management,Remove Spotify
+99,System Updates,Update the system
+100,System Updates,Upgrade all my packages
+101,Managing Users and Groups,Add a new user
+102,Managing Users and Groups,Delete the user John
+103,System Logs,Show me the system log
+104,Disk Management,Show me my disk partitions
+105,Open Applications,Open up Chrome
+106,System Settings,Open preferences
+107,File Management,Open my files
+108,Web Browsing,Go to my browser
+109,Media Control,Can you start the music?
+110,System Shutdown,Turn off my PC
+111,System Information,Tell me about my machine
+112,File Search,Search for a file
+113,Network Management,Can you show my network connections?
+114,Software Installation,Can you install a program?
+115,System Information,Can you show my system specs?
+116,Battery Management,Can you check the battery percentage?
+117,Task Management,Can you list my running programs?
+118,File Management,I need to browse my files
+119,File Search,Can you search my computer?
+120,Internet Connectivity,Can you see if I am connected to WiFi?
+121,Software Installation,I need to download a program
+122,Application Control,Can you start Chrome?
+123,System Settings,Can you take me to the settings?
+124,Shutdown/Restart,Please shut down the system
+125,Network Management,Check my internet connection
+126,Web Browsing,Can you start a new tab?
+127,Task Management,Can you show what’s open?
+128,System Updates,Can you see if there’s an update?
+129,File Backup,I need to copy my documents
+130,System Troubleshooting,Diagnose any problems with my PC
+131,System Monitoring,Can you check the system performance?
+132,File Compression,I need to compress this folder
+133,Cloud Storage,Please sync my data to the cloud
+134,Application Control,Please close my music player
+135,System Restart,Can you reboot my computer?
+136,Device Management,Can you show the connected devices?
+137,Printer Management,Can you see if the printer is connected?
+138,Keyboard Shortcuts,Can you display the hotkeys?
+139,Clipboard Management,Please open the clipboard manager
+140,Screen Capture,Can you capture the screen?
+141,System Time,Can you check the current time?
+142,Taskbar Management,Please show the taskbar configuration options
+143,Network Troubleshooting,Can you troubleshoot the network?
+144,Cloud Backup,Please back up my files to Google Drive
+145,System Information,Can you show me the specs of my computer?
+146,Battery Management,Please tell me the battery percentage
+147,Task Management,Show me my active applications
+148,File Management,Show me my file system
+149,File Search,Find a file on my computer
+150,Internet Connectivity,Can you check if I’m connected to WiFi?
+151,Software Installation,Can you download the program for me?
+152,Application Control,Can you launch my media player?
+153,System Settings,Can you take me to the settings page?
+154,Shutdown/Restart,Shut down the system for me
+155,Opening/Closing Apps,Open my audio player
+156,File Browsing,Can you show me my Documents folder?
+157,Command Line Operations,Show me all the files in this directory
+158,File Permissions,Allow read-write access to this file
+159,Creating/Editing Files,Open a new file to edit
+160,Package Management,Download and install VLC
+161,System Updates,Please install the latest updates
+162,Managing Users and Groups,Can you add a user to my system?
+163,System Logs,Display the system logs
+164,Disk Management,Show me the available disks
+165,Network Configuration,Enable my wireless network
+166,File Sharing,Send this file to the server
+167,SSH Connections,Start an SSH session
+168,Internet Browsing,Start up Firefox
+169,VPN Setup,Can you start my VPN?
+170,Resource Monitoring,Monitor system load
+171,Processes Management,Kill Chrome
+172,Hardware Info,Show the hardware details
+173,Backup and Recovery,Please create a backup of my data
+174,Virtualization,Start VirtualBox
+175,Opening/Closing Apps,Launch Spotify
+176,File Browsing,Open the Documents directory
+177,Command Line Operations,Show me the contents of the directory
+178,File Permissions,Change file permissions to read-write
+179,Creating/Editing Files,Start editing a document
+180,Package Management,Can you install the VLC package?
+181,System Updates,Run the update command
+182,Managing Users and Groups,Create a new account
+183,System Logs,Can I see the recent logs?
+184,Disk Management,Display the available disks
+185,Network Configuration,Can you set up my wireless network?
+186,File Sharing,Can you send this file to the server?
+187,SSH Connections,SSH into my remote machine
+188,Internet Browsing,Launch my browser
+189,VPN Setup,Can you enable my VPN?
+190,Resource Monitoring,What’s the system load?
+191,Processes Management,End the application
+192,Hardware Info,Show me my hardware information
+193,Backup and Recovery,Can you create a backup of my system?
+194,Virtualization,Launch my VM
+195,Opening/Closing Apps,Launch Spotify
+196,Opening/Closing Apps,Exit the browser
+197,File Browsing,Open the Documents directory
+198,File Browsing,Transfer this to Downloads
+199,Command Line Operations,Show me the contents of the directory
+200,File Permissions,Change file permissions to read-write
+201,Creating/Editing Files,Start editing a document
+202,Package Management,Can you install the VLC package?
+203,Package Management,Uninstall the Spotify package
+204,System Updates,Run the update command
+205,System Updates,Install the newest updates
+206,Managing Users and Groups,Create a new account
+207,Managing Users and Groups,Remove the account named John
+208,System Logs,Can I see the recent logs?
+209,Disk Management,Display the available disks
+210,Open Applications,Can you start Firefox?
+211,System Settings,Launch control panel
+212,File Management,Can you open the file explorer?
+213,Web Browsing,Can you open a webpage for me?
+214,Media Control,Turn on the tunes
+215,System Shutdown,Can you shut down my system?
+216,System Information,What are the system specs?
+217,File Search,I need to locate a picture
+218,Network Management,Show WiFi options
+219,Software Installation,I need a new software
+220,System Information,I want to know my machine's information
+221,Battery Management,What is my battery status?
+222,Task Management,Display the open tasks on my PC
+223,File Management,Please show me my files
+224,File Search,Look for a document
+225,Internet Connectivity,Tell me my internet connection status
+226,Software Installation,Can you get this software for me?
+227,Application Control,Open the music player
+228,System Settings,I need to go to system preferences
+229,Shutdown/Restart,Can you turn off my PC?
+230,Network Management,Open the network menu
+231,Web Browsing,Take me to Google
+232,Task Management,I need to see the current processes
+233,System Updates,I need to update my software
+234,File Backup,Please create a backup of my files
+235,System Troubleshooting,Please scan for system errors
+236,System Monitoring,How much RAM is being used?
+237,File Compression,Please create a zip file of these files
+238,Cloud Storage,Upload my documents online
+239,Application Control,Stop the web browser from running
+240,System Restart,I need to restart the machine
+241,Device Management,Check my hardware peripherals
+242,Printer Management,Show me the printer status
+243,Keyboard Shortcuts,Please give me the list of shortcuts
+244,Clipboard Management,I need to check my clipboard content
+245,Screen Capture,Please take a picture of my screen
+246,System Time,Tell me the system time
+247,Taskbar Management,I need to manage my taskbar
+248,Network Troubleshooting,I need help with the network connection
+249,Cloud Backup,I need to upload my documents to the cloud
+250,System Information,Tell me about my system setup
+251,Battery Management,Can you check if my battery is low?
+252,Task Management,Can you list the current tasks?
+253,File Management,I want to browse my folders
+254,File Search,Please look for my file
+255,Internet Connectivity,Tell me the status of my network
+256,Software Installation,I need this software installed
+257,Application Control,Start the video player for me
+258,System Settings,I want to change my system settings
+259,Shutdown/Restart,Please turn off the PC
+260,Opening/Closing Apps,Can you launch Spotify for me?
+261,File Browsing,Please open the pictures directory
+262,Command Line Operations,Display the files in the folder
+263,File Permissions,Make this file executable by me
+264,Creating/Editing Files,Please create a text document
+265,Package Management,Add VLC to my system using apt
+266,System Updates,Check for new updates
+267,Managing Users and Groups,Please create an additional user
+268,System Logs,Give me the logs from today
+269,Disk Management,Display the hard drive partitions
+270,Network Configuration,Join the Wi-Fi network
+271,File Sharing,Share my files with others
+272,SSH Connections,Can you SSH into my server?
+273,Internet Browsing,Can you launch my browser?
+274,VPN Setup,Enable VPN connection
+275,Resource Monitoring,Can you show me the memory usage?
+276,Processes Management,Stop running Firefox
+277,Hardware Info,Tell me about my CPU and RAM
+278,Backup and Recovery,Make a copy of my files
+279,Virtualization,Create a new VM
+280,Opening/Closing Apps,Start VLC media player
+281,File Browsing,Navigate to the pictures folder
+282,Command Line Operations,Display the folder structure
+283,File Permissions,Make this file executable
+284,Creating/Editing Files,Create a new file in the text editor
+285,Package Management,Use apt to install VLC
+286,System Updates,Can you upgrade my software?
+287,Managing Users and Groups,Please make a new user
+288,System Logs,Display the error log
+289,Disk Management,List my partitions
+290,Network Configuration,Enable my Wi-Fi connection
+291,File Sharing,Set up a shared folder
+292,SSH Connections,Can you log me into my server?
+293,Internet Browsing,Start Chrome
+294,VPN Setup,Connect to my VPN server
+295,Resource Monitoring,Check how much RAM is being used
+296,Processes Management,Stop the Chrome process
+297,Hardware Info,Check the CPU and memory details
+298,Backup and Recovery,Run a system backup
+299,Virtualization,Can you run VirtualBox?
+300,Opening/Closing Apps,Start VLC media player
+301,Opening/Closing Apps,Quit Chrome
+302,File Browsing,Navigate to the pictures folder
+303,File Browsing,Copy this document to Pictures
+304,Command Line Operations,Display the folder structure
+305,File Permissions,Make this file executable
+306,Creating/Editing Files,Create a new file in the text editor
+307,Package Management,Use apt to install VLC
+308,Package Management,Delete the Spotify application
+309,System Updates,Can you upgrade my software?
+310,System Updates,Can you upgrade my system?
+311,Managing Users and Groups,Please make a new user
+312,Managing Users and Groups,Can you get rid of John’s account?
+313,System Logs,Display the error log
+314,Disk Management,List my partitions
+315,Open Applications,Run the web browser
+316,System Settings,Open up system configurations
+317,File Management,Open the directory browser
+318,Web Browsing,Start a search in Chrome
+319,Media Control,I want to hear music
+320,System Shutdown,Power off the computer
+321,System Information,Give me details about my PC
+322,File Search,Can you search my computer for a file?
+323,Network Management,Open network preferences
+324,Software Installation,Please install this app for me
+325,System Information,Give me the system configuration
+326,Battery Management,Tell me how much battery I have left
+327,Task Management,I want to see the current processes
+328,File Management,Start the file explorer
+329,File Search,Please find a file
+330,Internet Connectivity,Show my current connection details
+331,Software Installation,Please install this tool
+332,Application Control,Please run Spotify
+333,System Settings,Launch control panel
+334,Shutdown/Restart,Power off the machine
+335,Network Management,How do I manage my network settings?
+336,Web Browsing,Please open Chrome for me
+337,Task Management,Please display my active programs
+338,System Updates,Please show me available updates
+339,File Backup,Can you back up my data for me?
+340,System Troubleshooting,Help me with system troubleshooting
+341,System Monitoring,Tell me the system load
+342,File Compression,Compress this folder for me
+343,Cloud Storage,I need to store my files in the cloud
+344,Application Control,Quit the terminal window
+345,System Restart,Can you perform a system reboot?
+346,Device Management,What devices are connected to my system?
+347,Printer Management,Check if the printer is ready
+348,Keyboard Shortcuts,I need to see all the keyboard shortcuts
+349,Clipboard Management,Can you access my clipboard?
+350,Screen Capture,Take a snapshot of my desktop
+351,System Time,What’s the time on my computer?
+352,Taskbar Management,Change the taskbar settings
+353,Network Troubleshooting,Can you diagnose the internet problems?
+354,Cloud Backup,Can you upload my data to Dropbox?
+355,System Information,Can you list my system details?
+356,Battery Management,What's the battery status right now?
+357,Task Management,I want to see my running programs
+358,File Management,Open the file manager for me
+359,File Search,Search for a file by name
+360,Internet Connectivity,Please check if I have an internet connection
+361,Software Installation,Please get this app for me
+362,Application Control,Please open Spotify
+363,System Settings,Please open the control panel
+364,Shutdown/Restart,Reboot my system
+365,Opening/Closing Apps,Play some tunes
+366,File Browsing,I need to view my files
+367,Command Line Operations,Give me the list of files
+368,File Permissions,Can you modify the file's permissions?
+369,Creating/Editing Files,Start a fresh file
+370,Package Management,Can you fetch VLC for me?
+371,System Updates,Run a system upgrade
+372,Managing Users and Groups,Add a new person to my system
+373,System Logs,Show me the error logs
+374,Disk Management,Can you check my disk structure?
+375,Network Configuration,Set up a wireless connection
+376,File Sharing,Please set up file sharing
+377,SSH Connections,Open a secure shell to my remote machine
+378,Internet Browsing,Please open my internet browser
+379,VPN Setup,Activate my VPN client
+380,Resource Monitoring,Please display resource stats
+381,Processes Management,Close the Firefox process
+382,Hardware Info,Please show me my system configuration
+383,Backup and Recovery,Run a backup for all documents
+384,Virtualization,Can you run my virtual machine?
+385,Opening/Closing Apps,Can you open the music app?
+386,File Browsing,Can you display my files?
+387,Command Line Operations,Can you run the ls command?
+388,File Permissions,Allow me to modify this file
+389,Creating/Editing Files,Launch Gedit and open a file
+390,Package Management,Download VLC media player
+391,System Updates,Fetch the latest updates
+392,Managing Users and Groups,Set up a user with this name
+393,System Logs,Show me logs from the last boot
+394,Disk Management,Can you check my disk space?
+395,Network Configuration,Join a network
+396,File Sharing,Share my files across the network
+397,SSH Connections,Establish an SSH session
+398,Internet Browsing,Can you open the web browser?
+399,VPN Setup,Start the VPN client
+400,Resource Monitoring,Display the current memory usage
+401,Processes Management,Terminate my browser
+402,Hardware Info,Give me a list of my hardware
+403,Backup and Recovery,Make a backup of my data
+404,Virtualization,Start my container
+405,Opening/Closing Apps,Can you open the music app?
+406,Opening/Closing Apps,Shut down this web browser
+407,File Browsing,Can you display my files?
+408,File Browsing,I want to place this in my folder
+409,Command Line Operations,Can you run the ls command?
+410,File Permissions,Allow me to modify this file
+411,Creating/Editing Files,Launch Gedit and open a file
+412,Package Management,Download VLC media player
+413,Package Management,I don't need Spotify anymore
+414,System Updates,Fetch the latest updates
+415,System Updates,Update my system software
+416,Managing Users and Groups,Set up a user with this name
+417,Managing Users and Groups,Purge the John user
+418,System Logs,Show me logs from the last boot
+419,Disk Management,Can you check my disk space?
+420,Open Applications,Start my email client
+421,System Settings,I need to adjust settings
+422,File Management,I need to view my folders
+423,Web Browsing,Show me the website
+424,Media Control,Start playing my playlist
+425,System Shutdown,Turn off everything
+426,System Information,Can you tell me the hardware details?
+427,File Search,Look for a text document
+428,Network Management,Change my network settings
+429,Software Installation,Run the software installer
+430,System Information,Tell me the specs of my computer
+431,Battery Management,How much charge is left on my laptop?
+432,Task Management,What programs are running on my computer?
+433,File Management,Open the folder for me
+434,File Search,I need to search for a specific file
+435,Internet Connectivity,Is my internet working?
+436,Software Installation,Help me with installing a new app
+437,Application Control,Start VLC
+438,System Settings,Please open my settings
+439,Shutdown/Restart,Shut down everything
+440,Network Management,I need to adjust the WiFi settings
+441,Web Browsing,Can you search for something on the web?
+442,Task Management,What apps are running right now?
+443,System Updates,Run a system update check
+444,File Backup,Please make sure my files are saved safely
+445,System Troubleshooting,Look for any system malfunctions
+446,System Monitoring,Check my system’s CPU usage
+447,File Compression,Can you make a compressed archive?
+448,Cloud Storage,Please back up my documents to the cloud
+449,Application Control,Shut down all open programs
+450,System Restart,Restart my laptop for me
+451,Device Management,Can you open the device manager?
+452,Printer Management,Can you print a test page for me?
+453,Keyboard Shortcuts,Show me the available hotkeys
+454,Clipboard Management,What’s on my clipboard right now?
+455,Screen Capture,Can you capture what’s on my screen?
+456,System Time,I need to know the current time
+457,Taskbar Management,Can you check the taskbar properties?
+458,Network Troubleshooting,What’s wrong with my WiFi?
+459,Cloud Backup,Please store my documents in the cloud
+460,System Information,What are the characteristics of my machine?
+461,Battery Management,Show me how much charge I have
+462,Task Management,Please show the active processes
+463,File Management,Please display my files
+464,File Search,I need to find a specific file
+465,Internet Connectivity,Can you verify my internet is working?
+466,Software Installation,Install this tool on my system
+467,Application Control,Launch my email client
+468,System Settings,Go to the display settings
+469,Shutdown/Restart,Power off the machine
+470,Opening/Closing Apps,I need to open VLC
+471,File Browsing,Display my Downloads
+472,Command Line Operations,Run the ls command to show files
+473,File Permissions,Set the file's access level to full
+474,Creating/Editing Files,Launch a text editor
+475,Package Management,Install VLC on my computer
+476,System Updates,Update all packages on my system
+477,Managing Users and Groups,Set up a new account on my machine
+478,System Logs,Can you pull the system log for me?
+479,Disk Management,View the disk partition details
+480,Network Configuration,Connect to the internet
+481,File Sharing,I need to share this folder
+482,SSH Connections,Connect to my server via SSH
+483,Internet Browsing,Open Google Chrome
+484,VPN Setup,Please establish a VPN connection
+485,Resource Monitoring,Show me my system's performance
+486,Processes Management,End the current application
+487,Hardware Info,Display the hardware stats
+488,Backup and Recovery,Take a snapshot of my system
+489,Virtualization,Start the VM software
+490,Opening/Closing Apps,Please run the music application
+491,File Browsing,Go to the files in /home
+492,Command Line Operations,What’s in this directory?
+493,File Permissions,Set this file’s permission to 777
+494,Creating/Editing Files,Please make a new file for me
+495,Package Management,Add VLC to my system
+496,System Updates,Check for updates
+497,Managing Users and Groups,Can you add a new account?
+498,System Logs,Look at the log file for today
+499,Disk Management,How do my partitions look?
+500,Network Configuration,Connect to the internet via Wi-Fi
+501,File Sharing,I need to share this document
+502,SSH Connections,Access my remote server via SSH
+503,Internet Browsing,Open up my internet browser
+504,VPN Setup,Activate my VPN
+505,Resource Monitoring,Monitor my system's performance
+506,Processes Management,Close Firefox completely
+507,Hardware Info,Can you tell me about my system hardware?
+508,Backup and Recovery,Create a snapshot of my files
+509,Virtualization,Create and run a VM
+510,Opening/Closing Apps,Please run the music application
+511,Opening/Closing Apps,Terminate the Firefox window
+512,File Browsing,Go to the files in /home
+513,File Browsing,Can you organize my files?
+514,Command Line Operations,What’s in this directory?
+515,File Permissions,Set this file’s permission to 777
+516,Creating/Editing Files,Please make a new file for me
+517,Package Management,Add VLC to my system
+518,Package Management,Purge Spotify from my system
+519,System Updates,Check for updates
+520,System Updates,Apply the latest system updates
+521,Managing Users and Groups,Can you add a new account?
+522,Managing Users and Groups,I want to delete John’s profile
+523,System Logs,Look at the log file for today
+524,Disk Management,How do my partitions look?
+525,Open Applications,I need the music player
+526,System Settings,Can you show me settings?
+527,File Management,Start the file manager
+528,Web Browsing,I need to open a new tab
+529,Media Control,Can you play the radio?
+530,System Shutdown,Please shut the system down
+531,System Information,Open my system configuration
+532,File Search,Find the file I need
+533,Network Management,Manage my internet connections
+534,Software Installation,Install a new tool
+535,System Information,Can you check the system info?
+536,Battery Management,Check my battery health
+537,Task Management,Can you show me all active tasks?
+538,File Management,Take me to my documents
+539,File Search,Show me where my file is located
+540,Internet Connectivity,What’s the status of my connection?
+541,Software Installation,Can you set up a program?
+542,Application Control,Open my media player
+543,System Settings,Go to the display settings
+544,Shutdown/Restart,Can you restart the computer?
+545,Network Management,Take me to the network preferences
+546,Web Browsing,I need to start a web search
+547,Task Management,Show me the programs that are open
+548,System Updates,Check for any new updates
+549,File Backup,I need to back up my important files
+550,System Troubleshooting,Can you run a diagnostic on my machine?
+551,System Monitoring,Can you show the resource consumption?
+552,File Compression,Help me zip these documents
+553,Cloud Storage,Sync my data with cloud storage
+554,Application Control,Can you exit the application?
+555,System Restart,Please restart the computer
+556,Device Management,Please list the devices connected to my PC
+557,Printer Management,Is my printer online?
+558,Keyboard Shortcuts,Can you open the keyboard shortcuts guide?
+559,Clipboard Management,Please manage my clipboard for me
+560,Screen Capture,Take a screenshot right now
+561,System Time,Show me the time on my PC
+562,Taskbar Management,Show me the taskbar preferences
+563,Network Troubleshooting,Can you check for network issues?
+564,Cloud Backup,Help me upload files to OneDrive
+565,System Information,Show me my PC’s configuration
+566,Battery Management,Is my battery full?
+567,Task Management,List the open tasks on my computer
+568,File Management,Can you show the documents folder?
+569,File Search,Can you help me find my report?
+570,Internet Connectivity,What is the network status?
+571,Software Installation,Can you set up this program?
+572,Application Control,Open the PDF viewer
+573,System Settings,Can you open the settings menu?
+574,Shutdown/Restart,I need to restart my laptop
+575,Opening/Closing Apps,Please launch the media app
+576,File Browsing,Can you navigate to my files?
+577,Command Line Operations,What’s in this directory?
+578,File Permissions,Change the file’s security settings
+579,Creating/Editing Files,Open a new text file to work on
+580,Package Management,Please install the video player
+581,System Updates,Upgrade my system to the latest version
+582,Managing Users and Groups,Please add an account
+583,System Logs,Open the log file
+584,Disk Management,What partitions do I have?
+585,Network Configuration,Please set up my Wi-Fi
+586,File Sharing,Make this directory available to others
+587,SSH Connections,Please log into my remote server
+588,Internet Browsing,Launch Firefox browser
+589,VPN Setup,Set up VPN on my system
+590,Resource Monitoring,Tell me how much RAM is used
+591,Processes Management,Shut down the process
+592,Hardware Info,Show me the components of my computer
+593,Backup and Recovery,Create a system backup
+594,Virtualization,Run my virtual environment
+595,Opening/Closing Apps,Open my music software
+596,File Browsing,Show me the directory structure
+597,Command Line Operations,List the items in the current path
+598,File Permissions,Change the permissions on this file
+599,Creating/Editing Files,Create a new text document
+600,Package Management,Install the video player VLC
+601,System Updates,Install the system updates
+602,Managing Users and Groups,Create an additional user account
+603,System Logs,Check the system log
+604,Disk Management,Check the partition structure
+605,Network Configuration,Connect to my preferred Wi-Fi
+606,File Sharing,Allow file sharing between systems
+607,SSH Connections,Log in to my remote host
+608,Internet Browsing,Launch the browser app
+609,VPN Setup,Turn on the VPN
+610,Resource Monitoring,Can you show me the system resource usage?
+611,Processes Management,End the running process
+612,Hardware Info,Display my system specifications
+613,Backup and Recovery,Backup my entire system
+614,Virtualization,Activate my virtual machine
+615,Opening/Closing Apps,Open the media player
+616,Opening/Closing Apps,Close the browser app
+617,File Browsing,Browse my downloads folder
+618,File Browsing,Please move this file to a different folder
+619,Command Line Operations,Can you list the directory contents?
+620,File Permissions,Please grant me full file permissions
+621,Creating/Editing Files,Open a new document for editing
+622,Package Management,Please install VLC for me
+623,Package Management,Can you uninstall Spotify?
+624,System Updates,Please update my system
+625,System Updates,Please upgrade everything
+626,Managing Users and Groups,Please create a new user profile
+627,Managing Users and Groups,Please delete John from the system
+628,System Logs,Please show the system logs
+629,Disk Management,Can you show my disk usage?
+630,Open Applications,Open up VLC
+631,System Settings,Change my system preferences
+632,File Management,Launch my documents folder
+633,Web Browsing,Load a web page
+634,Media Control,Begin streaming music
+635,System Shutdown,Can you power off my PC?
+636,System Information,Show my computer's information
+637,File Search,Search my files for a document
+638,Network Management,Can you open the WiFi menu?
+639,Software Installation,Can you get me this program?
+640,System Information,Show me what my system is running
+641,Battery Management,Can you monitor my battery for me?
+642,Task Management,What tasks are currently open?
+643,File Management,Can you show my folders?
+644,File Search,Search for a photo
+645,Internet Connectivity,Are we connected to the internet?
+646,Software Installation,Download and install this software
+647,Application Control,Run the video player
+648,System Settings,I need to change the system configurations
+649,Shutdown/Restart,Turn off the system
+650,Network Management,Show me the connection settings
+651,Web Browsing,Show me the web browser
+652,Task Management,Can you check the active tasks for me?
+653,System Updates,Update my system software
+654,File Backup,Create a backup of all documents
+655,System Troubleshooting,Is my system working properly?
+656,System Monitoring,Monitor the performance of my computer
+657,File Compression,Create a compressed file for me
+658,Cloud Storage,Upload this folder to Google Drive
+659,Application Control,Close all running applications for me
+660,System Restart,Can you reboot the system for me?
+661,Device Management,Show me all the devices I have attached
+662,Printer Management,Tell me the printer's connection status
+663,Keyboard Shortcuts,What are the shortcuts for my system?
+664,Clipboard Management,Can you paste from the clipboard?
+665,Screen Capture,Please snap a screenshot
+666,System Time,Can you display the system clock?
+667,Taskbar Management,Can you adjust the taskbar for me?
+668,Network Troubleshooting,Help me with the internet connection problems
+669,Cloud Backup,Sync my data to the cloud storage
+670,System Information,Please display my system specs
+671,Battery Management,Tell me if I need to plug in my charger
+672,Task Management,What programs are open right now?
+673,File Management,Take me to the files section
+674,File Search,Search for the word 'invoice' in my documents
+675,Internet Connectivity,Can you see if my connection is active?
+676,Software Installation,Download the software and install it
+677,Application Control,Can you start up Chrome for me?
+678,System Settings,Show me my system preferences
+679,Shutdown/Restart,Can you turn off my computer?
+680,Opening/Closing Apps,Start the music program
+681,File Browsing,Open the home directory
+682,Command Line Operations,Please show me the contents
+683,File Permissions,Alter the file permissions
+684,Creating/Editing Files,Begin editing a file
+685,Package Management,Get VLC media player from the repository
+686,System Updates,Fetch and apply the latest updates
+687,Managing Users and Groups,Can you create a user with this name?
+688,System Logs,Check the system logs for errors
+689,Disk Management,Please show the disk setup
+690,Network Configuration,Help me get online with Wi-Fi
+691,File Sharing,Enable sharing for this folder
+692,SSH Connections,Start the SSH connection
+693,Internet Browsing,Start up the web browser
+694,VPN Setup,Run the VPN service
+695,Resource Monitoring,Give me an overview of my system resources
+696,Processes Management,End the application instance
+697,Hardware Info,Give me a summary of my system's hardware
+698,Backup and Recovery,Please back up my important files
+699,Virtualization,Please activate the virtual machine
+700,Opening/Closing Apps,Start playing music
+701,File Browsing,Display the files in the current directory
+702,Command Line Operations,Show me the directory contents
+703,File Permissions,Update the file's access control
+704,Creating/Editing Files,Open an editor to write a new file
+705,Package Management,Fetch and install VLC
+706,System Updates,Please upgrade my system
+707,Managing Users and Groups,I need a new user on my system
+708,System Logs,Display the logs from the past day
+709,Disk Management,View my disk and partition info
+710,Network Configuration,Set up my Wi-Fi network
+711,File Sharing,Share this directory with others
+712,SSH Connections,Open an SSH connection
+713,Internet Browsing,Please start my internet browser
+714,VPN Setup,Make a VPN connection
+715,Resource Monitoring,Show me system performance stats
+716,Processes Management,Shut down the application
+717,Hardware Info,List the details of my computer hardware
+718,Backup and Recovery,Please take a backup of all my files
+719,Virtualization,Launch the virtual environment
+720,Opening/Closing Apps,Can you start up Spotify?
+721,Opening/Closing Apps,Shut down the internet browser
+722,File Browsing,Can you show me my pictures folder?
+723,File Browsing,Put this file in my Pictures folder
+724,Command Line Operations,Please show me the list of files
+725,File Permissions,Can you modify the permissions on this file?
+726,Creating/Editing Files,Create a new text file for me
+727,Package Management,Can you fetch VLC from the repository?
+728,Package Management,Please remove Spotify for me
+729,System Updates,Run the system updater
+730,System Updates,Can you upgrade all packages?
+731,Managing Users and Groups,Can you add another user?
+732,Managing Users and Groups,Remove John’s user account
+733,System Logs,Can you display the log entries?
+734,Disk Management,Display all my disk partitions
+735,Open Applications,Launch Spotify
+736,System Settings,Take me to display settings
+737,File Management,Can you open a new file window?
+738,Web Browsing,Can you search for something on the internet?
+739,Media Control,Play some background music
+740,System Shutdown,Please turn off the machine
+741,System Information,Check system specs for me
+742,File Search,Can you help me find an image?
+743,Network Management,I need to check the network configuration
+744,Software Installation,Help me with a program installation
+745,System Information,Please display the system details
+746,Battery Management,Please show the battery status
+747,Task Management,Give me a list of my current apps
+748,File Management,I want to open my files
+749,File Search,Help me find my files
+750,Internet Connectivity,How is my network connection?
+751,Software Installation,Get the latest version of this program
+752,Application Control,Start up my email client
+753,System Settings,Can you open the settings for me?
+754,Shutdown/Restart,Please power down the PC
+755,Network Management,Can you check the network status?
+756,Web Browsing,Open my homepage
+757,Task Management,What processes are running on my PC?
+758,System Updates,Is there any update for my computer?
+759,File Backup,Please back up my data to the cloud
+760,System Troubleshooting,Can you detect any issues with my computer?
+761,System Monitoring,What’s the system load right now?
+762,File Compression,Can you reduce the size of this folder?
+763,Cloud Storage,Can you save my files to Dropbox?
+764,Application Control,I want to quit the current app
+765,System Restart,I need to perform a restart
+766,Device Management,Check the connected devices on my system
+767,Printer Management,Can you manage my printer settings?
+768,Keyboard Shortcuts,Please tell me the key combinations
+769,Clipboard Management,I need to see the last copied item
+770,Screen Capture,Can you make a screen capture?
+771,System Time,Tell me the time right now
+772,Taskbar Management,Please manage the taskbar settings
+773,Network Troubleshooting,Can you fix my internet?
+774,Cloud Backup,Can you back up my important files?
+775,System Information,Give me the system summary
+776,Battery Management,Can you check the battery level?
+777,Task Management,Can you show me the running processes?
+778,File Management,Can you show my directories?
+779,File Search,Can you locate a file on my PC?
+780,Internet Connectivity,How is my WiFi connection?
+781,Software Installation,Please help me install this application
+782,Application Control,I need to open Firefox
+783,System Settings,Please display the system settings
+784,Shutdown/Restart,Please shut down the system
+825,Opening/Closing Apps,Launch the audio player
+826,Opening/Closing Apps,Quit Firefox
+827,File Browsing,Open my documents directory
+828,File Browsing,Can you transfer this file to the Docs?
+829,Command Line Operations,What files are in this folder?
+830,File Permissions,Allow editing of this file
+831,Creating/Editing Files,Start a new document
+832,Package Management,Install VLC on my computer
+833,Package Management,Delete the Spotify app from my system
+834,System Updates,Can you check for software updates?
+835,System Updates,Run the upgrade command
+836,Managing Users and Groups,Set up an account for a new user
+837,Managing Users and Groups,Can you remove the profile for John?
+838,System Logs,Check the logs from the last session
+839,Disk Management,List all available partitions
+840,Open Applications,Start the terminal
+841,System Settings,Open the device manager
+842,File Management,Open the downloads folder
+843,Web Browsing,Please open Bing
+844,Media Control,Turn on my favorite track
+845,System Shutdown,Shut down all programs and turn off
+846,System Information,Can you list the system details?
+847,File Search,Locate a PDF document for me
+848,Network Management,Access network preferences
+849,Software Installation,Install this app from the store
+850,System Information,I need my computer's information
+851,Battery Management,What is the current battery level?
+852,Task Management,Show me the open applications
+853,File Management,Open the file browser
+854,File Search,Search for the word 'report' in my documents
+855,Internet Connectivity,Check if the WiFi is on
+856,Software Installation,I need a new application installed
+857,Application Control,Can you open Firefox?
+858,System Settings,Show me the system settings
+859,Shutdown/Restart,Can you shut down and restart?
+860,Network Management,Open up the network configuration
+861,Web Browsing,Please load a webpage
+862,Task Management,Give me a list of tasks
+863,System Updates,Can you check for the latest updates?
+864,File Backup,Ensure my files are backed up
+865,System Troubleshooting,Diagnose system performance problems
+866,System Monitoring,How much memory is being used?
+867,File Compression,Zip these files into one archive
+868,Cloud Storage,Please put this data on the cloud
+869,Application Control,Can you exit Spotify?
+870,System Restart,Reboot my system now
+871,Device Management,Can you display my hardware devices?
+872,Printer Management,Please show the printer options
+873,Keyboard Shortcuts,Give me the list of system hotkeys
+874,Clipboard Management,What’s in my copy-paste history?
+875,Screen Capture,I need to take a picture of my monitor
+876,System Time,Please show the current time on the system
+877,Taskbar Management,I want to change the taskbar options
+878,Network Troubleshooting,Diagnose network issues for me
+879,Cloud Backup,I need to copy my files online
+880,System Information,I want to know the details about my system
+881,Battery Management,How much power is left in my battery?
+882,Task Management,Tell me what is currently open on my system
+883,File Management,I need to access my documents
+884,File Search,Please search my system for files
+885,Internet Connectivity,Can you tell me if I’m online?
+886,Software Installation,Install this from the internet
+887,Application Control,Can you run the word processor?
+888,System Settings,Take me to the configuration settings
+889,Shutdown/Restart,Restart the machine for me
+930,Opening/Closing Apps,Please play some music
+931,Opening/Closing Apps,Exit from the web browser
+932,File Browsing,Please open the Downloads folder
+933,File Browsing,Move this file to the specified location
+934,Command Line Operations,Can you show me what’s inside this directory?
+935,File Permissions,Make this file writable
+936,Creating/Editing Files,Can you open a text editor and create a file?
+937,Package Management,Add VLC package to my setup
+938,Package Management,Uninstall the music app
+939,System Updates,Install the latest system update
+940,System Updates,Apply all available upgrades
+941,Managing Users and Groups,Please make a new account for me
+942,Managing Users and Groups,Purge John’s account from the system
+943,System Logs,Can you display my error log?
+944,Disk Management,Show me the partition layout
+945,Open Applications,Can you open the calculator?
+946,System Settings,Launch network settings
+947,File Management,Go to my pictures directory
+948,Web Browsing,Go to the website I want
+949,Media Control,Start music from Spotify
+950,System Shutdown,Can you switch off the computer?
+951,System Information,Give me a rundown of the system
+952,File Search,Please find a specific file
+953,Network Management,Show me network connections
+954,Software Installation,Can you download and install software?
+955,System Information,What is my system setup?
+956,Battery Management,I need to know if my battery is low
+957,Task Management,Check what’s running on my system
+958,File Management,Show me the file explorer
+959,File Search,Please look for a text file
+960,Internet Connectivity,Can you verify the internet connection?
+961,Software Installation,Install this package
+962,Application Control,Please launch my browser
+963,System Settings,Go to preferences
+964,Shutdown/Restart,I need to restart my PC
+965,Network Management,Please manage my internet connection
+966,Web Browsing,Start a browsing session
+967,Task Management,Can you list the active programs?
+968,System Updates,Please check the updates for me
+969,File Backup,Start a backup process
+970,System Troubleshooting,Check for hardware or software issues
+971,System Monitoring,Track system performance for me
+972,File Compression,Make a .zip file of my documents
+973,Cloud Storage,Can you save my documents to OneDrive?
+974,Application Control,Please close the file manager
+975,System Restart,Please restart everything
+976,Device Management,Manage the external devices
+977,Printer Management,Can you check the printer queue?
+978,Keyboard Shortcuts,What are the most common keyboard shortcuts?
+979,Clipboard Management,Show me what I copied
+980,Screen Capture,Can you record the screen for me?
+981,System Time,What is the time on my machine?
+982,Taskbar Management,Can you show me the taskbar setup?
+983,Network Troubleshooting,Is there an issue with my WiFi?
+984,Cloud Backup,Please upload my pictures to the cloud
+985,System Information,Can you check the system info for me?
+986,Battery Management,Check my laptop’s battery status
+987,Task Management,Please display my running applications
+988,File Management,Open my file explorer
+989,File Search,I need help locating a file
+990,Internet Connectivity,Check my connection speed
+991,Software Installation,Can you run the installer for me?
+992,Application Control,Start up my favorite app
+993,System Settings,Can you show the preferences menu?
+1035,Opening/Closing Apps,Can you start the song app?
+1036,Opening/Closing Apps,Stop the Firefox application
+1037,File Browsing,Can you display the directory for my files?
+1038,File Browsing,Place the document in my folders
+1039,Command Line Operations,Run a list of files in the folder
+1040,File Permissions,Change the permissions of the file to allow modification
+1041,Creating/Editing Files,Please launch Gedit and create a file
+1042,Package Management,Download and install VLC media player
+1043,Package Management,Remove Spotify from my system setup
+1044,System Updates,Can you fetch the newest updates?
+1045,System Updates,Update all software packages
+1046,Managing Users and Groups,Can you create a fresh user profile?
+1047,Managing Users and Groups,Delete the John user profile
+1048,System Logs,Show me the log from my last system boot
+1049,Disk Management,Can you show my disk drives?
+1140,Opening/Closing Apps,Please open the music player for me
+1141,Opening/Closing Apps,Can you close Chrome?
+1142,File Browsing,Take me to my home directory
+1143,File Browsing,Transfer the file to Documents
+1144,Command Line Operations,List all contents of this folder
+1145,File Permissions,Give me full access to this file
+1146,Creating/Editing Files,Create a blank document
+1147,Package Management,Install the VLC software
+1148,Package Management,Can you get rid of the Spotify package?
+1149,System Updates,Check for the latest software version
+1150,System Updates,Can you install the latest system updates?
+1151,Managing Users and Groups,Add a new user to the system
+1152,Managing Users and Groups,Can you remove the account named John?
+1153,System Logs,Look at the log file entries
+1154,Disk Management,Please list the partitions on my system
+1245,Opening/Closing Apps,Start the audio application
+1246,Opening/Closing Apps,Terminate the browser app
+1247,File Browsing,Show me the contents of my folders
+1248,File Browsing,Please copy this document to Downloads
+1249,Command Line Operations,Can you display the files in this directory?
+1250,File Permissions,Can you set full read-write permissions?
+1251,Creating/Editing Files,Open up a new editing session
+1252,Package Management,Can you install the VLC tool for me?
+1253,Package Management,Purge the Spotify application from my setup
+1254,System Updates,Update my system setup
+1255,System Updates,Upgrade my packages to the latest version
+1256,Managing Users and Groups,Create an additional user on my system
+1257,Managing Users and Groups,Can you delete John from the system for me?
+1258,System Logs,Display the system error logs
+1259,Disk Management,Can you check my hard drive space?
+1350,Opening/Closing Apps,Open up the music app
+1351,Opening/Closing Apps,Please close the web browser
+1352,File Browsing,Can you show me the file tree?
+1353,File Browsing,Put the file in the Pictures directory
+1354,Command Line Operations,Show me the contents of the folder
+1355,File Permissions,Change the file permissions to full access
+1356,Creating/Editing Files,Can you start a new text file?
+1357,Package Management,Please install the latest version of VLC
+1358,Package Management,Uninstall Spotify from my computer
+1359,System Updates,Run the system update process
+1360,System Updates,Run the upgrade for all my apps
+1361,Managing Users and Groups,Set up a new user account
+1362,Managing Users and Groups,Please get rid of the user named John
+1363,System Logs,Can you show me the logs for today?
+1364,Disk Management,List the partitions on my disk
+1455,Opening/Closing Apps,Please run the VLC player
+1456,Opening/Closing Apps,Exit the browser window
+1457,File Browsing,Open the user directory
+1459,Command Line Operations,Run the command to show directory contents
+1460,File Permissions,Make this file editable for me
+1461,Creating/Editing Files,Create a new file in the editor
+1462,Package Management,Fetch VLC and install it
+1463,Package Management,I want to delete the Spotify software
+1464,System Updates,Please apply the latest patches
+1465,System Updates,Can you update all packages for me?
+1466,Managing Users and Groups,Please set up a new user profile
+1467,Managing Users and Groups,I want John’s account gone
+1468,System Logs,Please list the system logs
+1469,Disk Management,Show all disk partitions

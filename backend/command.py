@@ -112,11 +112,11 @@ def takecommand():
 
     return query.lower()
 
-def process_command(query, learner=None):
+def process_command(query, command_handler=None):
     """Centralized command processing function to avoid code duplication"""
-    if learner is None:
-        from backend.learning import CommandLearner
-        learner = CommandLearner()
+    if command_handler is None:
+        from backend.command_handler import CommandHandler
+        command_handler = CommandHandler()
     
     try:
         # Check for shutdown command first
@@ -125,54 +125,9 @@ def process_command(query, learner=None):
             shutdown_app()
             return True
             
-        # First try with the command learner
-        if learner.handle_command(query):
-            return True
-            
-        # Then try with the predefined commands
-        if "open" in query:
-            from backend.feature import openCommand
-            openCommand(query)
-            return True
-        elif "send message to" in query and "on facebook" in query:
-            from backend.feature import facebookMessage
-            facebookMessage(query)
-            return True
-        elif "find" in query and "on facebook" in query:
-            from backend.feature import facebookSearch
-            facebookSearch(query)
-            return True
-        elif "send message" in query or "phone call" in query or "video call" in query:
-            from backend.feature import findContact, whatsApp
-            flag = ""
-            Phone, name = findContact(query)
-            if Phone != 0:
-                if "send message" in query:
-                    flag = 'message'
-                    speak("what message to send?")
-                    message_to_send = takecommand()
-                    if message_to_send is None:
-                        message_to_send = ""
-                    query = message_to_send
-                elif "phone call" in query:
-                    flag = 'call'
-                else:
-                    flag = 'video call'
-                whatsApp(Phone, query, flag, name)
-                return True
-        elif "youtube" in query:
-            from backend.feature import PlayYoutube
-            PlayYoutube(query)
-            return True
-        # Handle teaching commands
-        elif "teach" in query and "how to" in query:
-            return handle_teaching(query, learner)
-        elif "what can you do" in query or "help" == query or "show commands" in query:
-            return show_capabilities(learner)
-        else:
-            from backend.feature import chatBot
-            chatBot(query)
-            return True
+        # Sử dụng CommandHandler để xử lý tất cả các lệnh
+        return command_handler.handle_command(query)
+        
     except Exception as e:
         print(f"Error processing command: {e}")
         speak("Sorry, I encountered an error processing your command")
@@ -335,14 +290,13 @@ def cancel_teaching():
     speak("Teaching canceled.")
     return True
 
-# Expose this function to JavaScript
 @eel.expose
 def takeAllCommand(message=None):
     print(f"takeAllCommand called with message: {message}")
     
-    # Initialize the command learner
-    from backend.learning import CommandLearner
-    learner = CommandLearner()
+    # Initialize the command handler
+    from backend.command_handler import CommandHandler
+    command_handler = CommandHandler()
     
     # Process text input
     if message is not None:
@@ -357,8 +311,8 @@ def takeAllCommand(message=None):
             shutdown_app()
             return
         
-        # Use centralized command processing
-        process_command(query, learner)
+        # Use improved command processing
+        process_command(query, command_handler)
         
         # Display main interface
         eel.ShowHood()
@@ -378,7 +332,7 @@ def takeAllCommand(message=None):
         shutdown_app()
         return
     
-    # Use centralized command processing
-    process_command(query, learner)
+    # Use improved command processing
+    process_command(query, command_handler)
     
     eel.ShowHood()

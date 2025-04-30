@@ -1,0 +1,30 @@
+directories:
+  output: dist
+  buildResources: build
+appId: com.huyngan.jarvis
+productName: JARVIS
+files:
+  - filter:
+      - '**/*'
+      - '!**/node_modules/*'
+extraResources:
+  - from: ../
+    to: app
+    filter:
+      - '**/*'
+      - '!node_modules/**'
+      - '!electron/**'
+      - '!**/__pycache__/**'
+      - '!**/*.pyc'
+  - from: ./python
+    to: python
+win:
+  target: nsis
+  icon: build/icons/icon.ico
+artifactName: ${productName}-Setup-${version}.${ext}
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  runAfterFinish: true
+electronVersion: 30.5.1

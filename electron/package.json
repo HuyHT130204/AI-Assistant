@@ -8,7 +8,8 @@
         "prebuild": "node fix-package.js && cd .. && prepare_python.bat",
         "build": "electron-builder",
         "start-python": "cd .. && python run.py",
-        "start-all": "concurrently \"npm run start-python\" \"npm run start\""
+        "start-all": "concurrently \"npm run start-python\" \"npm run start\"",
+        "clean-cache": "rimraf ./dist/.cache"
     },
     "author": "Huy Ngan",
     "license": "MIT",

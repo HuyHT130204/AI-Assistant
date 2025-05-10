@@ -1,6 +1,22 @@
+# Ignore Python cache and sensitive files
+/backend/__pycache__/
+/backend/cookie.json
+
+# Ignore environment files and databases
 /envjarvis
 contact.csv
 jarvis.db
-/backend/__pycache__
-/backend/cookie.json
-/electron
+
+# Ignore Electron build outputs
+/electron/dist/
+/electron/out/
+/electron/*.log
+*.log
+*.tmp
+
+# Ignore executables
+*.exe
+
+# Optional: Ignore node_modules if not needed in repo
+/electron/node_modules/
+/backend/node_modules/

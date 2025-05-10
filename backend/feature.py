@@ -320,11 +320,33 @@ def facebookMessage(query):
         speak("I couldn't understand who to message on Facebook")
 
 def chatBot(query):
-    user_input = query.lower()
-    chatbot = hugchat.ChatBot(cookie_path="backend\cookie.json")
-    id = chatbot.new_conversation()
-    chatbot.change_conversation(id)
-    response = chatbot.chat(user_input)
-    print(response)
-    speak(response)
-    return response
+    try:
+        user_input = query.lower()
+        print(f"Processing chat query: {user_input}")
+        
+        # Đường dẫn đúng đến cookie.json (sửa lỗi dấu gạch chéo)
+        cookie_path = os.path.join(os.path.dirname(__file__), "cookie.json")
+        print(f"Using cookie path: {cookie_path}")
+        
+        # Kiểm tra tồn tại của file cookie
+        if not os.path.exists(cookie_path):
+            print("Cookie file not found! Using fallback response.")
+            response = "Tôi không thể kết nối với dịch vụ chat lúc này. Vui lòng thử lại sau."
+        else:
+            try:
+                chatbot = hugchat.ChatBot(cookie_path=cookie_path)
+                id = chatbot.new_conversation()
+                chatbot.change_conversation(id)
+                response = chatbot.chat(user_input)
+            except Exception as e:
+                print(f"HugChat error: {e}")
+                response = "Xin lỗi, tôi đang gặp sự cố khi xử lý câu hỏi của bạn. Hãy thử lại sau."
+        
+        print(f"ChatBot response: {response}")
+        speak(response)
+        return True  # Trả về True để command_handler biết đã xử lý thành công
+    except Exception as e:
+        print(f"Error in chatBot function: {str(e)}")
+        speak("Xin lỗi, tôi không thể trả lời câu hỏi của bạn lúc này.")
+        return False  # Trả về False để biết có lỗi xảy ra
+

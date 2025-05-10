@@ -207,12 +207,22 @@
               <div class="col-md-1"></div>
               <div class="col-md-10">
                   <div class="d-flex justify-content-center align-items-center" style="height: 80vh;">
-                      <canvas id="canvasOne" width="700" height="420" style="position: absolute;"></canvas>
-                      <div class="JarvisHood">
-                          <div class="square">
-                              <span class="circle"></span>
-                              <span class="circle"></span>
-                              <span class="circle"></span>
+                      <!-- Replace the original JarvisHood with Heart container -->
+                      <div class="heart-container">
+                          <!-- Heart base shape -->
+                          <div class="heart-base"></div>
+                          
+                          <!-- Rotating borders -->
+                          <div class="heart-border heart-border-1"></div>
+                          <div class="heart-border heart-border-2"></div>
+                          <div class="heart-border heart-border-3"></div>
+                          
+                          <!-- Center pulse -->
+                          <div class="heart-center"></div>
+                          
+                          <!-- Particles -->
+                          <div class="particles" id="particles">
+                              <!-- Particles will be added by JavaScript -->
                           </div>
                       </div>
                   </div>

@@ -58,6 +58,11 @@ class CommandHandler:
         query = query.lower().strip()
         print(f"Handling input: {query}")
         
+        # Handle help commands first
+        if any(cmd in query for cmd in ["what can you do", "help", "show commands", "show features"]):
+            print("Help command detected")
+            return self._show_capabilities()
+        
         # First check if it's an exact match with a database command
         if query in self.db_commands:
             print(f"Exact command match found in database: {self.db_commands[query]}")
@@ -73,8 +78,8 @@ class CommandHandler:
         
         # Process based on classification
         if input_type == "question":
-            chatBot(query)
-            return True
+            print("Processing as question with chatBot")
+            return chatBot(query)
         else:
             return self._process_command(query)
     
@@ -254,35 +259,41 @@ class CommandHandler:
         
     def _show_capabilities(self):
         """Show what the assistant can do"""
-        capabilities = [
-            "I can open applications on your computer",
-            "I can search for information on various platforms",
-            "I can play music and videos on different services",
-            "I can send messages and make calls to your contacts",
-            "I can interact with Facebook to search and message",
-            "I can play videos on YouTube",
-            "I can learn new commands when you teach me",
-            "I can answer your questions about various topics"
-        ]
-        
-        # Get supported platforms
-        supported_platforms = self.learner.get_supported_platforms()
-        
-        search_platforms = ", ".join(supported_platforms.get("search", []))
-        play_platforms = ", ".join(supported_platforms.get("play", []))
-        
-        if search_platforms:
-            capabilities.append(f"I can search on: {search_platforms}")
-        if play_platforms:
-            capabilities.append(f"I can play media on: {play_platforms}")
+        try:
+            capabilities = [
+                "I can open applications on your computer",
+                "I can search for information on various platforms",
+                "I can play music and videos on different services",
+                "I can send messages and make calls to your contacts",
+                "I can interact with Facebook to search and message",
+                "I can play videos on YouTube",
+                "I can learn new commands when you teach me",
+                "I can answer your questions about various topics"
+            ]
             
-        capabilities.append("You can teach me new commands by saying 'teach you how to search/play on [platform]'")
-        
-        # Display capabilities
-        speak("Here are some things I can do:")
-        for capability in capabilities:
-            print(f"- {capability}")
+            # Get supported platforms
+            supported_platforms = self.learner.get_supported_platforms()
             
-        speak("\n".join(capabilities))
-        return True
+            search_platforms = ", ".join(supported_platforms.get("search", []))
+            play_platforms = ", ".join(supported_platforms.get("play", []))
+            
+            if search_platforms:
+                capabilities.append(f"I can search on: {search_platforms}")
+            if play_platforms:
+                capabilities.append(f"I can play media on: {play_platforms}")
+                
+            capabilities.append("You can teach me new commands by saying 'teach you how to search/play on [platform]'")
+            
+            # Display capabilities
+            speak("Here are some things I can do:")
+            for capability in capabilities:
+                print(f"- {capability}")
+                
+            speak("\n".join(capabilities))
+            return True
+        except Exception as e:
+            print(f"Error showing capabilities: {str(e)}")
+            speak("Xin lỗi, tôi không thể hiển thị khả năng của mình lúc này.")
+            return False
+    
     

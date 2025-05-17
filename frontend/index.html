@@ -21,12 +21,75 @@
     <link rel="stylesheet" href="assets/vendore/texllate/animate.css" />
     <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="./stylesheets/identify.css">
+    <link rel="stylesheet" href="./stylesheets/face_auth.css">
+    <script src="face_auth.js" defer></script>
 </head>
 <body>
+    <!-- Overlay hộp thoại thiết lập FaceID -->
+    <div id="faceIdSetupOverlay" class="overlay" style="display: none;">
+        <div id="faceIdSetupDialog" class="dialog modern-dialog" style="display: none;">
+            <div class="dialog-icon"><i class="bi bi-person-bounding-box"></i></div>
+            <h2>Thiết lập FaceID</h2>
+            <p>Bạn có muốn thiết lập nhận diện khuôn mặt để đăng nhập vào ứng dụng này không?</p>
+            <div class="dialog-buttons">
+                <button id="setupFaceIdBtn" class="btn btn-primary">Thiết lập ngay</button>
+                <button id="skipFaceIdBtn" class="btn btn-secondary">Bỏ qua</button>
+            </div>
+        </div>
+        <div id="faceIdSetupProgress" class="dialog modern-dialog progress-container" style="display: none;">
+            <div class="spinner"></div>
+            <p>Đang thiết lập FaceID...</p>
+            <p>Vui lòng nhìn vào camera và giữ khuôn mặt ở giữa</p>
+        </div>
+        <div id="faceIdSetupSuccess" class="dialog modern-dialog result-message" style="display: none;">
+            <div class="dialog-icon success"><i class="bi bi-emoji-smile"></i></div>
+            <p>Thiết lập FaceID thành công!</p>
+        </div>
+        <div id="faceIdSetupError" class="dialog modern-dialog result-message" style="display: none;">
+            <div class="dialog-icon error"><i class="bi bi-x-octagon"></i></div>
+            <p>Thiết lập FaceID thất bại. Vui lòng thử lại.</p>
+        </div>
+    </div>
+
+    <!-- Overlay cho Authentication Failed Dialog -->
+    <div id="authFailedOverlay" class="overlay" style="display: none;">
+        <div id="authFailedDialog" class="dialog modern-dialog" style="display: none;">
+            <div class="dialog-icon error"><i class="bi bi-x-circle"></i></div>
+            <h2>Authentication Failed</h2>
+            <p>Face not recognized. You need to authenticate to access the system.</p>
+            <div class="dialog-buttons">
+                <button id="retryAuthBtn" class="button primary">Try Again</button>
+                <button id="exitAppBtn" class="button secondary">Exit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay cho Face ID Required Dialog -->
+    <div id="faceIdRequiredOverlay" class="overlay" style="display: none;">
+        <div id="faceIdRequiredDialog" class="dialog modern-dialog" style="display: none;">
+            <div class="dialog-icon info"><i class="bi bi-exclamation-triangle"></i></div>
+            <h2>Face ID Required</h2>
+            <p>For security reasons, Face ID setup is required to use this application.</p>
+            <p>Please complete the Face ID setup process to continue.</p>
+        </div>
+    </div>
+
+    <!-- Hộp thoại thông báo cần mở lại app -->
+    <div id="manualRestartOverlay" class="overlay" style="display: none;">
+        <div id="manualRestartDialog" class="dialog modern-dialog" style="display: none;">
+            <div class="dialog-icon info"><i class="bi bi-info-circle"></i></div>
+            <h2>Thiết lập FaceID thành công</h2>
+            <p>Vui lòng <b>tắt và mở lại ứng dụng</b> để hoàn tất quá trình thiết lập.</p>
+        </div>
+    </div>
+
     <div class="container">
       <section id="Start">
         <div class="row">
           <div class="col-lg-12">
+            <!-- Chat History -->
+            <div id="chatHistory" class="mb-4"></div>
+            
             <div
               class="d-flex justify-content-center align-items-center universe-background"
               style="height: 80vh; position: relative; overflow: hidden;"

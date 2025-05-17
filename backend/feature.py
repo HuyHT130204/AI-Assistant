@@ -141,15 +141,13 @@ def hotword():
                 except:
                     pass
                 
-                # Try calling closeWindow through eel
+                # Gọi closeWindow qua eel, KHÔNG gọi os._exit(0) ở đây nữa
                 try:
                     eel.closeWindow()
                 except:
                     pass
                 
-                # Force immediate exit
-                time.sleep(1)
-                os._exit(0)  # Most aggressive exit method
+                # Không gọi os._exit(0) ở đây nữa, sẽ gọi khi confirm_shutdown được frontend gọi lại
                 
     except Exception as e:
         print(f"Error in hotword detection: {e}")
@@ -349,4 +347,3 @@ def chatBot(query):
         print(f"Error in chatBot function: {str(e)}")
         speak("Xin lỗi, tôi không thể trả lời câu hỏi của bạn lúc này.")
         return False  # Trả về False để biết có lỗi xảy ra
-

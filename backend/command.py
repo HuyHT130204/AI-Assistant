@@ -8,22 +8,98 @@ import webbrowser
 import sys
 from urllib.parse import quote
 
+# Biến toàn cục lưu engine pyttsx3 hiện tại
+current_tts_engine = None
+
+@eel.expose
+def stop_speaking():
+    global current_tts_engine
+    try:
+        if current_tts_engine is not None:
+            current_tts_engine.stop()
+            current_tts_engine = None
+    except Exception as e:
+        print(f"Error stopping TTS: {e}")
+    return True
+
 @eel.expose
 def speak(text):
     text = str(text)
     engine = pyttsx3.init('sapi5')
     voices = engine.getProperty('voices')
-    
     # Fix: Check the number of available voices before setting
     voice_index = 0  # Default to the first voice
     if len(voices) > 1:
         voice_index = 1  # Use second voice if available
-    
     engine.setProperty('voice', voices[voice_index].id)
     engine.setProperty('rate', 174)  # Set rate before speaking
     eel.DisplayMessage(text)
     engine.say(text)
     engine.runAndWait()
+
+@eel.expose
+def shutdown_app():
+    """Function to shut down the application completely"""
+    print("Executing shutdown_app function...")
+    
+    try:
+        print("Attempting to close browser window...")
+        
+        # Just try DisplayMessage which seems to be working
+        try:
+            eel.DisplayMessage("Shutting down...")
+        except Exception as e:
+            print(f"Display error: {e}")
+        
+        # Try closeWindow
+        try:
+            eel.closeWindow()
+        except Exception as e:
+            print(f"closeWindow error: {e}")
+            
+        # Alternative method if the first fails
+        try:
+            eel._js_call('window.close')
+        except Exception as e:
+            print(f"window.close error: {e}")
+            
+    except Exception as e:
+        print(f"General shutdown error: {e}")
+    
+    # Dừng toàn bộ process ngay lập tức
+    finally:
+        os._exit(0)
+
+@eel.expose
+def confirm_shutdown():
+    """Function to confirm shutdown from JavaScript"""
+    print("Shutdown confirmed from JavaScript")
+    try:
+        os._exit(0)
+    except:
+        sys.exit(0)
+
+@eel.expose
+def closeWindow():
+    print("Executing closeWindow function...")
+    try:
+        print("Attempting to close browser window...")
+        try:
+            eel.DisplayMessage("Shutting down...")
+        except Exception as e:
+            print(f"Display error: {e}")
+        try:
+            eel.closeWindow()
+        except Exception as e:
+            print(f"closeWindow error: {e}")
+        try:
+            eel._js_call('window.close')
+        except Exception as e:
+            print(f"window.close error: {e}")
+    except Exception as e:
+        print(f"General shutdown error: {e}")
+    finally:
+        os._exit(0)
 
 def normalize_vietnamese_names(text):
     """
@@ -132,55 +208,6 @@ def process_command(query, command_handler=None):
         print(f"Error processing command: {e}")
         speak("Sorry, I encountered an error processing your command")
         return False
-
-@eel.expose
-def shutdown_app():
-    """Function to shut down the application completely"""
-    print("Executing shutdown_app function...")
-    
-    try:
-        # Simplified message
-        print("Attempting to close browser window...")
-        
-        # Just try DisplayMessage which seems to be working
-        try:
-            eel.DisplayMessage("Shutting down...")
-        except Exception as e:
-            print(f"Display error: {e}")
-        
-        # Try closeWindow
-        try:
-            eel.closeWindow()
-        except Exception as e:
-            print(f"closeWindow error: {e}")
-            
-        # Alternative method if the first fails
-        try:
-            eel._js_call('window.close')
-        except Exception as e:
-            print(f"window.close error: {e}")
-            
-    except Exception as e:
-        print(f"General shutdown error: {e}")
-    
-    # Force kill the process after a short delay
-    print("Forcing immediate termination...")
-    time.sleep(1)
-    
-    # Use the most aggressive method - os._exit
-    os._exit(0)  # This bypasses all cleanup and forces immediate exit
-
-@eel.expose
-def confirm_shutdown():
-    """Function to confirm shutdown from JavaScript"""
-    print("Shutdown confirmed from JavaScript")
-    # Đảm bảo rằng chương trình sẽ kết thúc sau khi nhận được xác nhận
-    import os, sys
-    try:
-        os._exit(0)  # Kết thúc ngay lập tức
-    except:
-        sys.exit(0)  # Phương pháp thay thế
-
 
 def handle_teaching(query, learner=None):
     """

@@ -73,6 +73,18 @@ def initialize_datasets():
         # Không làm chương trình dừng lại nếu gặp lỗi dataset
         pass
 
+def initialize_face_auth():
+    """Khởi tạo các thư mục cần thiết cho FaceID"""
+    try:
+        from backend.auth.face_manager import get_user_data_dir
+        
+        # Đảm bảo thư mục dữ liệu người dùng đã được tạo
+        data_dir = get_user_data_dir()
+        print("Đã khởi tạo thư mục dữ liệu FaceID tại:", data_dir)
+    except Exception as e:
+        print("Lỗi khi khởi tạo thư mục FaceID:", e)
+        pass
+
 if __name__ == "__main__":
     # Xác định chế độ đang chạy (development hoặc production)
     is_frozen = getattr(sys, 'frozen', False)
@@ -88,8 +100,9 @@ if __name__ == "__main__":
     # Di chuyển đến thư mục gốc của ứng dụng
     os.chdir(application_path)
     
-    # Khởi tạo datasets
+    # Khởi tạo datasets và thư mục FaceID
     initialize_datasets()
+    initialize_face_auth()
 
     # Khởi động các quy trình
     process1 = multiprocessing.Process(target=startJarvis)

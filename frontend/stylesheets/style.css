@@ -592,3 +592,31 @@ body {
     background-color: #f44336;
     color: white;
 }
+
+/* Chat History Styles */
+.chat-message-container {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-message {
+    color: #4CAF50;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.assistant-message {
+    color: #2196F3;
+    margin-top: 5px;
+}
+
+#chatHistory {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin: 10px 0;
+}

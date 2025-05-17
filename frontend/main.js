@@ -155,18 +155,19 @@ $(document).ready(function () {
     },
   });
 
-  $(".siri-message").textillate({
-    loop: true,
-    sync: true,
-    in: {
-      effect: "fadeInUp",
-      sync: true,
-    },
-    out: {
-      effect: "fadeOutUp",
-      sync: true,
-    },
-  });
+  // Xóa phần textillate cho siri-message
+  // $(".siri-message").textillate({
+  //   loop: true,
+  //   sync: true,
+  //   in: {
+  //     effect: "fadeInUp",
+  //     sync: true,
+  //   },
+  //   out: {
+  //     effect: "fadeOutUp",
+  //     sync: true,
+  //   },
+  // });
 
   var siriWave = new SiriWave({
     container: document.getElementById("siri-container"),
@@ -192,7 +193,9 @@ $(document).ready(function () {
   // Hiển thị tin nhắn từ trợ lý
   eel.expose(DisplayMessage);
   function DisplayMessage(message) {
-    $(".siri-message").text(message);
+    const siriMessage = $(".siri-message");
+    siriMessage.removeAttr("style"); // Xóa mọi hiệu ứng cũ
+    siriMessage.text(message);       // Hiển thị toàn bộ text ngay lập tức
   }
 
   // Hiển thị tin nhắn từ người dùng
@@ -207,7 +210,7 @@ $(document).ready(function () {
     eel.play_assistant_sound();
     $("#Oval").attr("hidden", true);
     $("#SiriWave").attr("hidden", false);
-    eel.takeAllCommand()();  // Đảm bảo tên function đúng
+    eel.takeAllCommand()();
   });
 
   // Xử lý phím tắt
@@ -215,9 +218,8 @@ $(document).ready(function () {
     // Win + J để kích hoạt trợ lý
     if (e.key === "j" && e.metaKey) {
       eel.play_assistant_sound();
-      $("#Oval").attr("hidden", true);
       $("#SiriWave").attr("hidden", false);
-      eel.takeAllCommand()();  // Đảm bảo tên function đúng
+      eel.takeAllCommand()();
     }
     
     // Enter để gửi tin nhắn
@@ -235,7 +237,7 @@ $(document).ready(function () {
     if (message.trim() !== "") {
       $("#Oval").attr("hidden", true);
       $("#SiriWave").attr("hidden", false);
-      eel.takeAllCommand(message);  // Đảm bảo tên function đúng
+      eel.takeAllCommand(message);
       $("#chatbox").val("");
       $("#MicBtn").attr("hidden", false);
       $("#SendBtn").attr("hidden", true);

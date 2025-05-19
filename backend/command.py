@@ -44,7 +44,14 @@ def speak(text):
         engine.setProperty('volume', volume / 100)
         engine.setProperty('rate', 174)
         
+        # Hiển thị tin nhắn trong giao diện chính
         eel.DisplayMessage(text)
+        
+        # Gửi tin nhắn đến hàm receiverText để thêm vào lịch sử nếu cần
+        # Chức năng hiển thị lịch sử chat được kiểm soát ở frontend
+        eel.receiverText(text)
+        
+        # Phát âm thanh
         engine.say(text)
         engine.runAndWait()
     except Exception as e:
@@ -54,6 +61,7 @@ def speak(text):
             engine = pyttsx3.init('sapi5')
             engine.setProperty('rate', 174)
             eel.DisplayMessage(text)
+            eel.receiverText(text)
             engine.say(text)
             engine.runAndWait()
         except Exception as e2:

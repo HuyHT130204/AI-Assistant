@@ -88,11 +88,13 @@
         <div class="row">
           <div class="col-lg-12">
             <!-- Chat History -->
-            <div id="chatHistory" class="mb-4"></div>
+            <div id="chatHistory" class="mb-4" style="display: none;">
+              <div id="chatHistoryContent"></div>
+            </div>
             
             <div
               class="d-flex justify-content-center align-items-center universe-background"
-              style="height: 80vh; position: relative; overflow: hidden;"
+              style="height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; margin: 0; padding: 0;"
             >
               <!-- Enhanced Universe Background -->
               <div class="stars-deep"></div>
@@ -170,8 +172,9 @@
                 </div>
               </div>
               
-              <div style="z-index: 10; position: relative;">
-                <div id="Loader" class="mb-4 position-relative">
+              <!-- Centered Initialization Container -->
+              <div class="initialization-container">
+                <div id="Loader" class="mb-4">
                   <!-- Enhanced Futuristic Circular Loader -->
                   <div class="quantum-core">
                     <div class="data-stream">
@@ -254,10 +257,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-            
-            <div class="d-flex justify-content-center align-items-center position-relative">
-              <h1 id="WishMessage" class="text-center mt-4 cosmic-message">
+              
+              <h1 id="WishMessage" class="text-center cosmic-message">
                 <span class="cosmic-text">Initializing...</span>
               </h1>
             </div>
@@ -365,7 +366,7 @@
     <div
         class="offcanvas offcanvas-start chat-canvas"
         data-bs-scroll="true"
-        data-bs-backdrop="false"
+        data-bs-backdrop="true"
         tabindex="-1"
         id="offcanvasScrolling"
         aria-labelledby="offcanvasScrollingLabel"
@@ -376,7 +377,7 @@
             </h5>
             <button
                 type="button"
-                class="btn-close text-reset"
+                class="btn-close custom-close-btn"
                 data-bs-dismiss="offcanvas"
                 aria-label="Close"
             ></button>

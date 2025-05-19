@@ -151,6 +151,9 @@ def start():
                 eel.hideStart()
                 eel.showMainInterface()
                 play_assistant_sound()
+                
+                # Kích hoạt lưu lịch sử chat sau khi đã xác thực thành công
+                eel.enableChatHistory()
             else:
                 speak("Face not recognized. Please try again")
                 speak("Authentication required to access the system")

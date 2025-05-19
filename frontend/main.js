@@ -1,4 +1,63 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Đảm bảo chatHistory bị ẩn hoàn toàn khi khởi động
+    const chatHistory = document.getElementById('chatHistory');
+    if (chatHistory) {
+        chatHistory.style.display = 'none';
+        chatHistory.style.minHeight = "0";
+        chatHistory.style.maxHeight = "0";
+        chatHistory.style.margin = "0";
+        chatHistory.style.padding = "0";
+        chatHistory.style.border = "none";
+        chatHistory.style.boxShadow = "none";
+    }
+    
+    // Đảm bảo initialization-container hiển thị đúng
+    const initContainer = document.querySelector('.initialization-container');
+    if (initContainer) {
+        initContainer.style.display = 'flex';
+        initContainer.style.position = 'absolute';
+        initContainer.style.top = '0';
+        initContainer.style.left = '0';
+        initContainer.style.width = '100%';
+        initContainer.style.height = '100%';
+        initContainer.style.zIndex = '100';
+    }
+    
+    // Đảm bảo các thành phần quét nằm chính giữa
+    const scanElements = document.querySelectorAll('#Loader, #FaceAuth, #FaceAuthSuccess, #HelloGreet');
+    scanElements.forEach(el => {
+        if (el) {
+            el.style.position = 'absolute';
+            el.style.top = '50%';
+            el.style.left = '50%';
+            el.style.transform = 'translate(-50%, -50%)';
+            el.style.zIndex = '110';
+        }
+    });
+    
+    // Đảm bảo WishMessage hiển thị đúng ở dưới cùng
+    const wishMessage = document.getElementById('WishMessage');
+    if (wishMessage) {
+        wishMessage.style.position = 'absolute';
+        wishMessage.style.bottom = '5%';
+        wishMessage.style.left = '0';
+        wishMessage.style.width = '100%';
+        wishMessage.style.textAlign = 'center';
+        wishMessage.style.zIndex = '110';
+    }
+    
+    // Đảm bảo universe-background hiển thị đúng
+    const universeBackground = document.querySelector('.universe-background');
+    if (universeBackground) {
+        universeBackground.style.height = '100vh';
+        universeBackground.style.display = 'flex';
+        universeBackground.style.flexDirection = 'column';
+        universeBackground.style.justifyContent = 'center';
+        universeBackground.style.alignItems = 'center';
+        universeBackground.style.position = 'relative';
+        universeBackground.style.overflow = 'hidden';
+    }
+    
     // Add particles with enhanced properties
     const particles = document.getElementById('particles');
     for (let i = 0; i < 40; i++) {

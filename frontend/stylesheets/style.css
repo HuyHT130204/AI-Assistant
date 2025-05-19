@@ -509,35 +509,123 @@ body {
 }
 
 .chat-canvas {
-    background-color: #19191982
+    background: linear-gradient(135deg, #121212 0%, #1e1e2f 100%);
+    box-shadow: 0 0 20px rgba(138, 43, 226, 0.2);
 }
 
 .receiver_message {
-    padding: 8px;
-    border: 2px solid cyan;
-    border-radius: 0px 15px 15px 20px;
-    width: auto;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #2b2b45 0%, #383880 100%);
+    border-radius: 18px 18px 18px 0;
+    margin-bottom: 10px;
     color: white;
-    background-color: #0dcaf014;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 85%;
+    word-wrap: break-word;
+    will-change: transform, opacity;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    transform: translateZ(0);
 }
 
 .sender_message {
-    padding: 8px;
-    border: 1px solid #00fff7e3;
-    border-radius: 15px 15px 0px 20px;
-    width: auto;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #6366f1 0%, #9333ea 100%);
+    border-radius: 18px 18px 0 18px;
+    margin-bottom: 10px;
     color: white;
-    background-color: #009e96;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 85%;
+    word-wrap: break-word;
+    will-change: transform, opacity;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    transform: translateZ(0);
 }
 
 .width-size {
-    max-width: 80%;
     width: auto;
+    max-width: 90%;
+}
+
+#chat-canvas-body {
+    padding: 15px;
+    overflow-y: auto;
+    height: calc(100vh - 56px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(138, 43, 226, 0.5) rgba(30, 30, 50, 0.1);
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+#chat-canvas-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-canvas-body::-webkit-scrollbar-track {
+    background: rgba(30, 30, 50, 0.1);
+    border-radius: 10px;
+}
+
+#chat-canvas-body::-webkit-scrollbar-thumb {
+    background: rgba(138, 43, 226, 0.5);
+    border-radius: 10px;
+}
+
+#chat-canvas-body::-webkit-scrollbar-thumb:hover {
+    background: rgba(138, 43, 226, 0.7);
+}
+
+@keyframes optimizedFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px) translateZ(0);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) translateZ(0);
+    }
+}
+
+.row.justify-content-start,
+.row.justify-content-end {
+    animation: optimizedFadeIn 0.2s ease-out forwards;
+}
+
+.offcanvas-header {
+    background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+    border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+    padding: 15px;
+}
+
+.offcanvas-title {
+    color: #bb86fc;
+    font-weight: 600;
+    text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+}
+
+/* Hiển thị thời gian tin nhắn */
+.message-time {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 5px;
+    text-align: right;
 }
 
 .btn-close {
-    background-color: #00ffd5;
+    color: #000;
+    text-shadow: none;
+    opacity: 0.8;
+    filter: brightness(0) invert(1);
+    transition: all 0.3s ease;
+    background-color: rgba(138, 43, 226, 0.3);
     border-radius: 50%;
+    padding: 8px;
+    box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+}
+
+.btn-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    background-color: rgba(138, 43, 226, 0.5);
 }
 
 .dialog-modal {
@@ -615,10 +703,53 @@ body {
 #chatHistory {
     max-height: 300px;
     overflow-y: auto;
-    padding: 10px;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    margin: 10px 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    margin: 15px 0;
+    box-shadow: inset 0 0 15px rgba(138, 43, 226, 0.3);
+    border: 1px solid rgba(138, 43, 226, 0.15);
+    backdrop-filter: blur(5px);
+    scrollbar-width: thin;
+    scrollbar-color: rgba(138, 43, 226, 0.5) rgba(30, 30, 50, 0.1);
+    will-change: transform;
+    z-index: 100;
+    position: relative;
+    min-height: 0;
+    transition: min-height 0.3s ease-out, max-height 0.3s ease-out, padding 0.3s ease-out, margin 0.3s ease-out;
+}
+
+/* Thiết lập ẩn hoàn toàn khi không có nội dung */
+#chatHistory:empty,
+#chatHistory #chatHistoryContent:empty,
+#chatHistory[style*="display: none"] {
+    min-height: 0 !important;
+    max-height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#chatHistory::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chatHistory::-webkit-scrollbar-track {
+    background: rgba(30, 30, 50, 0.1);
+    border-radius: 10px;
+}
+
+#chatHistory::-webkit-scrollbar-thumb {
+    background: rgba(138, 43, 226, 0.5);
+    border-radius: 10px;
+}
+
+#chatHistory::-webkit-scrollbar-thumb:hover {
+    background: rgba(138, 43, 226, 0.7);
 }
 
 /* Settings Modal Styles */
@@ -706,19 +837,6 @@ body {
 .form-check-label {
   color: #e6e6e6;
   padding-left: 0.3rem;
-}
-
-.btn-close {
-  color: rgb(0, 0, 0);
-  text-shadow: none;
-  opacity: 0.8;
-  filter: brightness(0) invert(1);
-  transition: all 0.3s ease;
-}
-
-.btn-close:hover {
-  opacity: 1;
-  transform: scale(1.1);
 }
 
 .btn-secondary {
@@ -834,4 +952,100 @@ body {
 .form-check-label:hover {
   color: #bb86fc;
   cursor: pointer;
+}
+
+.custom-close-btn {
+    background-color: rgba(138, 43, 226, 0.5) !important;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+    margin-right: 5px;
+}
+
+.custom-close-btn:hover {
+    background-color: rgba(170, 60, 255, 0.7) !important;
+    transform: scale(1.1);
+}
+
+.initialization-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+/* Position the loader directly over the sun */
+#Loader, #FaceAuth, #FaceAuthSuccess, #HelloGreet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 110;
+  pointer-events: all;
+}
+
+.cosmic-message {
+  color: #00aaff;
+  text-shadow: 0 0 10px rgba(0, 170, 255, 0.8);
+  font-size: 2.5rem;
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  animation: pulse 2s infinite;
+  letter-spacing: 3px;
+  z-index: 110;
+  pointer-events: all;
+}
+
+.cosmic-text {
+  background: linear-gradient(90deg, #00aaff, #00ffea, #00aaff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 3s ease infinite;
+  background-size: 200% auto;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.universe-background {
+  background-color: #000;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
 }

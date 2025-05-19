@@ -38,4 +38,15 @@ def restart_application():
     except Exception as e:
         print(f"Lỗi khi khởi động lại: {e}")
         return False
-    return True 
+    return True
+
+@eel.expose
+def takeAllCommand(message=None):
+    if message is None:
+        # Lấy tin nhắn chào mừng tùy chỉnh
+        welcome_message = get_welcome_message()
+        speak(welcome_message)
+        return
+        
+    # Xử lý các lệnh khác
+    # ... existing code ... 

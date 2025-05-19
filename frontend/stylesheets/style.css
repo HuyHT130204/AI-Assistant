@@ -620,3 +620,218 @@ body {
     border-radius: 8px;
     margin: 10px 0;
 }
+
+/* Settings Modal Styles */
+.modal-content {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+  color: #e6e6e6;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(138, 43, 226, 0.2);
+  padding: 1.5rem;
+  background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(138, 43, 226, 0.2);
+  padding: 1.2rem 1.5rem;
+  background: linear-gradient(90deg, #1a1a2e 0%, #16213e 100%);
+}
+
+.modal-title {
+  color: #bb86fc;
+  font-weight: 600;
+  font-size: 1.5rem;
+  text-shadow: 0 0 10px rgba(187, 134, 252, 0.3);
+}
+
+.form-label {
+  color: #bb86fc;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-control {
+  background-color: rgba(30, 30, 50, 0.6);
+  border: 1px solid rgba(138, 43, 226, 0.3);
+  border-radius: 8px;
+  color: white;
+  transition: all 0.3s ease;
+  padding: 0.6rem 1rem;
+}
+
+.form-control:focus {
+  background-color: rgba(40, 40, 60, 0.6);
+  border-color: #bb86fc;
+  box-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+  color: white;
+}
+
+.form-control::placeholder {
+  color: rgba(200, 200, 200, 0.5);
+}
+
+.form-range {
+  height: 6px;
+  border-radius: 3px;
+}
+
+.form-range::-webkit-slider-thumb {
+  background: #bb86fc;
+  box-shadow: 0 0 6px rgba(187, 134, 252, 0.8);
+}
+
+.form-range::-moz-range-thumb {
+  background: #bb86fc;
+  box-shadow: 0 0 6px rgba(187, 134, 252, 0.8);
+}
+
+.form-check-input {
+  background-color: rgba(30, 30, 50, 0.6);
+  border: 1px solid rgba(138, 43, 226, 0.5);
+}
+
+.form-check-input:checked {
+  background-color: #bb86fc;
+  border-color: #bb86fc;
+  box-shadow: 0 0 8px rgba(187, 134, 252, 0.6);
+}
+
+.form-check-label {
+  color: #e6e6e6;
+  padding-left: 0.3rem;
+}
+
+.btn-close {
+  color: rgb(0, 0, 0);
+  text-shadow: none;
+  opacity: 0.8;
+  filter: brightness(0) invert(1);
+  transition: all 0.3s ease;
+}
+
+.btn-close:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.btn-secondary {
+  background-color: rgba(70, 70, 90, 0.8);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background-color: rgba(90, 90, 110, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #9333ea 0%, #6366f1 100%);
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #a855f7 0%, #818cf8 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(138, 43, 226, 0.4);
+}
+
+.setting-section {
+  margin-bottom: 1.5rem;
+  position: relative;
+  padding: 0.5rem 0;
+}
+
+.setting-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: rgba(187, 134, 252, 0.6);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.setting-section:hover .setting-icon {
+  opacity: 1;
+  right: 0;
+}
+
+#volumeValue {
+  color: #bb86fc;
+  font-weight: 500;
+}
+
+/* Animation for modal */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.modal.fade .modal-dialog {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+  animation: modalFadeIn 0.4s forwards;
+}
+
+.active-btn {
+  transform: scale(0.95) !important;
+  box-shadow: 0 0 20px rgba(138, 43, 226, 0.8) !important;
+  transition: all 0.2s ease !important;
+}
+
+.voice-options {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.input-group-text {
+  background-color: rgba(50, 50, 70, 0.6);
+  border: 1px solid rgba(138, 43, 226, 0.2);
+  color: rgba(187, 134, 252, 0.8);
+  transition: all 0.3s ease;
+}
+
+.spinner-border {
+  border-width: 0.2rem;
+}
+
+.form-check-input:focus {
+  border-color: #bb86fc;
+  box-shadow: 0 0 8px rgba(187, 134, 252, 0.6);
+}
+
+.form-check-input:hover:not(:checked) {
+  border-color: rgba(187, 134, 252, 0.7);
+  cursor: pointer;
+}
+
+.form-check-label:hover {
+  color: #bb86fc;
+  cursor: pointer;
+}

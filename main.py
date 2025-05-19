@@ -6,6 +6,11 @@ from backend.auth.face_manager import is_face_id_setup, create_face_id, authenti
 from backend.feature import *
 from backend.command import *
 from threading import Thread
+from backend.settings import get_welcome_message
+import cv2
+import gc
+import psutil
+import subprocess
 
 # Đặt UTF-8 cho stdout và stderr nếu chưa được đặt trong run.py
 if sys.platform.startswith('win') and not isinstance(sys.stdout, io.TextIOWrapper):
@@ -47,7 +52,8 @@ def start():
     @eel.expose
     def init():
         eel.hideLoader()
-        speak("Welcome back")
+        welcome_message = get_welcome_message()
+        speak(welcome_message)
         
         # Kiểm tra FaceID ngay lập tức
         face_id_exists = check_face_id_exists()

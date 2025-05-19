@@ -4,7 +4,6 @@ import sqlite3
 import json
 import os
 import eel
-from backend.command import speak
 
 class Settings:
     def __init__(self, db_path="jarvis.db"):
@@ -170,38 +169,56 @@ def get_learned_commands():
 def delete_command(command_type, platform):
     settings = Settings()
     success = settings.delete_learned_command(command_type, platform)
-    if success:
-        speak(f"Successfully removed {command_type} command for {platform}")
-    else:
-        speak(f"Could not find {command_type} command for {platform}")
     return success
 
 @eel.expose
 def modify_command(command_type, platform, new_url_template):
     settings = Settings()
     success = settings.modify_learned_command(command_type, platform, new_url_template)
-    if success:
-        speak(f"Successfully updated {command_type} command for {platform}")
-    else:
-        speak(f"Could not update {command_type} command for {platform}")
     return success
 
 @eel.expose
 def export_learned_commands(file_path):
     settings = Settings()
     success = settings.export_settings(file_path)
-    if success:
-        speak("Successfully exported settings")
-    else:
-        speak("Failed to export settings")
     return success
 
 @eel.expose
 def import_learned_commands(file_path):
     settings = Settings()
     success = settings.import_settings(file_path)
-    if success:
-        speak("Successfully imported settings")
-    else:
-        speak("Failed to import settings")
     return success
+
+@eel.expose
+def get_assistant_settings():
+    """Lấy tất cả cài đặt của assistant"""
+    settings = Settings()
+    return {
+        "assistant_name": settings.get_setting("assistant", "name", "Assistant"),
+        "owner_name": settings.get_setting("assistant", "owner_name", ""),
+        "volume": settings.get_setting("voice", "volume", 100),
+        "voice_type": settings.get_setting("voice", "type", "male")
+    }
+
+@eel.expose
+def save_assistant_settings(settings_data):
+    """Lưu cài đặt của assistant"""
+    settings = Settings()
+    
+    # Lưu từng cài đặt
+    settings.set_setting("assistant", "name", settings_data.get("assistant_name", "Assistant"))
+    settings.set_setting("assistant", "owner_name", settings_data.get("owner_name", ""))
+    settings.set_setting("voice", "volume", settings_data.get("volume", 100))
+    settings.set_setting("voice", "type", settings_data.get("voice_type", "male"))
+    
+    return True
+
+@eel.expose
+def get_welcome_message():
+    """Lấy tin nhắn chào mừng dựa trên cài đặt"""
+    settings = Settings()
+    owner_name = settings.get_setting("assistant", "owner_name", "")
+    
+    if owner_name:
+        return f"Welcome back {owner_name}"
+    return "Welcome back"

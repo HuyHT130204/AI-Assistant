@@ -7,6 +7,7 @@ import re
 import webbrowser
 import sys
 from urllib.parse import quote
+from backend.settings import Settings
 
 # Biến toàn cục lưu engine pyttsx3 hiện tại
 current_tts_engine = None
@@ -24,18 +25,39 @@ def stop_speaking():
 
 @eel.expose
 def speak(text):
-    text = str(text)
-    engine = pyttsx3.init('sapi5')
-    voices = engine.getProperty('voices')
-    # Fix: Check the number of available voices before setting
-    voice_index = 0  # Default to the first voice
-    if len(voices) > 1:
-        voice_index = 1  # Use second voice if available
-    engine.setProperty('voice', voices[voice_index].id)
-    engine.setProperty('rate', 174)  # Set rate before speaking
-    eel.DisplayMessage(text)
-    engine.say(text)
-    engine.runAndWait()
+    try:
+        text = str(text)
+        engine = pyttsx3.init('sapi5')
+        voices = engine.getProperty('voices')
+        
+        # Lấy cài đặt từ database
+        settings = Settings()
+        volume = settings.get_setting("voice", "volume", 100)
+        voice_type = settings.get_setting("voice", "type", "male")
+        
+        # Set voice type
+        voice_index = 0 if voice_type == "male" else 1
+        if len(voices) > voice_index:
+            engine.setProperty('voice', voices[voice_index].id)
+        
+        # Set volume (0-100)
+        engine.setProperty('volume', volume / 100)
+        engine.setProperty('rate', 174)
+        
+        eel.DisplayMessage(text)
+        engine.say(text)
+        engine.runAndWait()
+    except Exception as e:
+        print(f"Error in speak function: {e}")
+        # Fallback to basic speech if settings fail
+        try:
+            engine = pyttsx3.init('sapi5')
+            engine.setProperty('rate', 174)
+            eel.DisplayMessage(text)
+            engine.say(text)
+            engine.runAndWait()
+        except Exception as e2:
+            print(f"Fallback speech also failed: {e2}")
 
 @eel.expose
 def shutdown_app():

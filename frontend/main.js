@@ -276,8 +276,180 @@ $(document).ready(function () {
     console.log("Chat button clicked");
   });
 
+  // Xử lý khi nhấn nút cài đặt
   $("#SettingBtn").click(function() {
-    // Xử lý khi nhấn nút cài đặt
-    console.log("Settings button clicked");
+    // Hiệu ứng nút khi nhấn
+    $(this).addClass("active-btn");
+    setTimeout(() => {
+      $(this).removeClass("active-btn");
+    }, 300);
+    
+    // Hiển thị loader trước khi lấy dữ liệu
+    $("#settingsModal .modal-body").html('<div class="text-center p-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div><p class="mt-2">Loading settings...</p></div>');
+    $("#settingsModal").modal("show");
+    
+    // Lấy cài đặt hiện tại từ backend với hiệu ứng loading
+    setTimeout(() => {
+      eel.get_assistant_settings()(function(settings) {
+        // Tạo lại nội dung form
+        $("#settingsModal .modal-body").html(`
+          <form id="settingsForm">
+            <div class="setting-section">
+              <label for="assistantName" class="form-label"><i class="bi bi-robot me-2"></i>Assistant Name</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="assistantName" placeholder="Enter assistant name" value="${settings.assistant_name}">
+                <span class="input-group-text"><i class="bi bi-pencil-fill"></i></span>
+              </div>
+            </div>
+
+            <div class="setting-section">
+              <label for="ownerName" class="form-label"><i class="bi bi-person-fill me-2"></i>Owner Name</label>
+              <div class="input-group">
+                <input type="text" class="form-control" id="ownerName" placeholder="Enter your name" value="${settings.owner_name}">
+                <span class="input-group-text"><i class="bi bi-pencil-fill"></i></span>
+              </div>
+            </div>
+
+            <div class="setting-section">
+              <label for="volumeRange" class="form-label"><i class="bi bi-volume-up-fill me-2"></i>Volume</label>
+              <input type="range" class="form-range" id="volumeRange" min="0" max="100" value="${settings.volume}">
+              <div class="d-flex justify-content-between">
+                <small><i class="bi bi-volume-mute-fill"></i></small>
+                <small id="volumeValue">${settings.volume}%</small>
+                <small><i class="bi bi-volume-up-fill"></i></small>
+              </div>
+            </div>
+
+            <div class="setting-section">
+              <label class="form-label"><i class="bi bi-mic-fill me-2"></i>Voice Type</label>
+              <div class="voice-options">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="voiceType" id="maleVoice" value="male" ${settings.voice_type !== "female" ? "checked" : ""}>
+                  <label class="form-check-label" for="maleVoice">
+                    <i class="bi bi-gender-male me-1"></i> Male
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="voiceType" id="femaleVoice" value="female" ${settings.voice_type === "female" ? "checked" : ""}>
+                  <label class="form-check-label" for="femaleVoice">
+                    <i class="bi bi-gender-female me-1"></i> Female
+                  </label>
+                </div>
+              </div>
+            </div>
+          </form>
+        `);
+
+        // Khởi tạo lại các sự kiện
+        initializeSettingsEvents();
+        
+        // Hiệu ứng hiển thị từng phần tử
+        $("#settingsForm .setting-section").each(function(index) {
+          $(this).css({
+            opacity: 0,
+            transform: 'translateY(20px)'
+          });
+          
+          setTimeout(() => {
+            $(this).css({
+              transition: 'all 0.4s ease',
+              opacity: 1,
+              transform: 'translateY(0)'
+            });
+          }, 100 * (index + 1));
+        });
+      });
+    }, 500); // Delay để tạo hiệu ứng loading
   });
+
+  // Khởi tạo các sự kiện cho form cài đặt
+  function initializeSettingsEvents() {
+    // Cập nhật giá trị âm lượng khi kéo thanh trượt
+    $("#volumeRange").on("input", function() {
+      const value = $(this).val();
+      $("#volumeValue").text(value + "%");
+      
+      // Thay đổi biểu tượng âm lượng tùy theo giá trị
+      const volumeIcon = $(".bi-volume-up-fill, .bi-volume-down-fill, .bi-volume-off-fill", $(this).closest(".setting-section")).not(".me-2");
+      volumeIcon.removeClass("bi-volume-up-fill bi-volume-down-fill bi-volume-off-fill");
+      
+      if (value > 70) {
+        volumeIcon.addClass("bi-volume-up-fill");
+      } else if (value > 20) {
+        volumeIcon.addClass("bi-volume-down-fill");
+      } else {
+        volumeIcon.addClass("bi-volume-off-fill");
+      }
+    });
+    
+    // Hiệu ứng hover cho các phần input
+    $(".input-group").hover(
+      function() {
+        $(this).find(".input-group-text").css({
+          "background": "rgba(187, 134, 252, 0.3)",
+          "border-color": "rgba(187, 134, 252, 0.5)"
+        });
+      },
+      function() {
+        $(this).find(".input-group-text").css({
+          "background": "",
+          "border-color": ""
+        });
+      }
+    );
+  }
+
+  // Xử lý khi lưu cài đặt
+  $("#saveSettings").click(function() {
+    // Thêm hiệu ứng loading
+    const originalText = $(this).html();
+    $(this).html('<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Saving...');
+    $(this).prop("disabled", true);
+    
+    const settings = {
+        assistant_name: $("#assistantName").val(),
+        owner_name: $("#ownerName").val(),
+        volume: parseInt($("#volumeRange").val()),
+        voice_type: $("input[name='voiceType']:checked").val()
+    };
+    
+    // Lưu cài đặt vào backend
+    eel.save_assistant_settings(settings)(function(success) {
+        setTimeout(() => {
+          if (success) {
+            // Hiển thị hiệu ứng thành công
+            $("#saveSettings").html('<i class="bi bi-check-lg me-2"></i>Saved');
+            $("#saveSettings").removeClass("btn-primary").addClass("btn-success");
+            
+            setTimeout(() => {
+              // Đóng modal sau 1s
+              $("#settingsModal").modal("hide");
+              
+              // Khôi phục nút sau khi đóng modal
+              setTimeout(() => {
+                $("#saveSettings").html(originalText);
+                $("#saveSettings").removeClass("btn-success").addClass("btn-primary");
+                $("#saveSettings").prop("disabled", false);
+              }, 300);
+              
+              // Thông báo thành công
+              eel.speak("Settings saved successfully");
+            }, 1000);
+          } else {
+            // Hiển thị thông báo lỗi
+            $("#saveSettings").html('<i class="bi bi-exclamation-triangle me-2"></i>Error');
+            $("#saveSettings").removeClass("btn-primary").addClass("btn-danger");
+            
+            setTimeout(() => {
+              $("#saveSettings").html(originalText);
+              $("#saveSettings").removeClass("btn-danger").addClass("btn-primary");
+              $("#saveSettings").prop("disabled", false);
+            }, 2000);
+          }
+        }, 800); // Giả lập độ trễ của mạng
+    });
+  });
+
+  // Khởi tạo sự kiện khi trang đã tải xong
+  initializeSettingsEvents();
 });

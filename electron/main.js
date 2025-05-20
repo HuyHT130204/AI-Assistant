@@ -241,6 +241,24 @@ app.on('activate', () => {
 app.on('before-quit', () => {
   isQuitting = true;
   
+  // Thêm lệnh xóa thư mục face_data
+  try {
+    const facePath = path.join(process.env.LOCALAPPDATA, 'AI-Assistant', 'face_data');
+    if (fs.existsSync(facePath)) {
+      console.log('Xóa thư mục face_data trước khi thoát');
+      // Thực thi batch script để xóa thư mục face_data
+      if (process.platform === 'win32') {
+        const batchPath = path.join(process.resourcesPath, 'app', 'electron', 'build', 'cleanup.bat');
+        if (fs.existsSync(batchPath)) {
+          console.log('Thực thi cleanup script:', batchPath);
+          spawn('cmd', ['/c', batchPath], { detached: true });
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Lỗi khi xóa thư mục face_data:', error);
+  }
+  
   // Đóng tiến trình Python khi thoát ứng dụng
   if (pythonProcess) {
     // Thử kết thúc tiến trình một cách nhẹ nhàng

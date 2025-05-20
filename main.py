@@ -100,11 +100,11 @@ def start():
         if sys.platform.startswith('win'):
             # Trên Windows, sử dụng AppData\Local\AI-Assistant
             app_name = "AI-Assistant"
-            base_dir = os.path.join(os.environ['LOCALAPPDATA'], app_name)
+            base_dir = os.path.normpath(os.path.join(os.environ['LOCALAPPDATA'], app_name))
         else:
             # Trên các hệ điều hành khác
             app_name = ".ai-assistant"
-            base_dir = os.path.join(os.path.expanduser("~"), app_name)
+            base_dir = os.path.normpath(os.path.join(os.path.expanduser("~"), app_name))
         
         # Tạo thư mục nếu chưa tồn tại
         if not os.path.exists(base_dir):

@@ -18,6 +18,8 @@ extraResources:
       - '!**/*.pyc'
   - from: ./python
     to: python
+  - from: ./build/cleanup.bat
+    to: app/electron/build/cleanup.bat
 win:
   target: nsis
   icon: build/icons/icon.ico
@@ -27,4 +29,8 @@ nsis:
   allowToChangeInstallationDirectory: true
   createDesktopShortcut: true
   runAfterFinish: true
+  deleteAppDataOnUninstall: true
+  include: build/installer.nsh
+  warningsAsErrors: false
+  perMachine: false
 electronVersion: 30.5.1

@@ -16,11 +16,11 @@ def get_user_data_dir():
     if sys.platform.startswith('win'):
         # Trên Windows, sử dụng AppData\Local\Programs\YourAppName
         app_name = "AI-Assistant"
-        base_dir = os.path.join(os.environ['LOCALAPPDATA'], app_name)
+        base_dir = os.path.normpath(os.path.join(os.environ['LOCALAPPDATA'], app_name))
     else:
         # Trên các hệ điều hành khác
         app_name = ".ai-assistant"
-        base_dir = os.path.join(os.path.expanduser("~"), app_name)
+        base_dir = os.path.normpath(os.path.join(os.path.expanduser("~"), app_name))
     
     # Tạo thư mục nếu chưa tồn tại
     data_dir = os.path.join(base_dir, "face_data")
@@ -360,16 +360,55 @@ def remove_face_id():
     data_dir = get_user_data_dir()
     
     try:
-        # Xóa thư mục samples
-        samples_dir = os.path.join(data_dir, "samples")
-        if os.path.exists(samples_dir):
-            shutil.rmtree(samples_dir)
-            os.makedirs(samples_dir, exist_ok=True)
-        
-        # Xóa file trainer.yml
-        trainer_file = os.path.join(data_dir, "trainer", "trainer.yml")
-        if os.path.exists(trainer_file):
-            os.remove(trainer_file)
+        # Xóa toàn bộ thư mục face_data
+        if os.path.exists(data_dir):
+            print(f"Đang xóa thư mục face_data: {data_dir}")
+            # Đóng tất cả các handles file có thể đang mở
+            gc.collect()  # Gợi ý garbage collector giải phóng resources
+            
+            # Xóa từng mục cụ thể trước
+            samples_dir = os.path.join(data_dir, "samples")
+            trainer_dir = os.path.join(data_dir, "trainer")
+            
+            # Xóa các file trong samples_dir
+            if os.path.exists(samples_dir):
+                for file in os.listdir(samples_dir):
+                    try:
+                        os.remove(os.path.join(samples_dir, file))
+                    except Exception as e:
+                        print(f"Không thể xóa file {file}: {e}")
+            
+            # Xóa trainer.yml
+            trainer_file = os.path.join(trainer_dir, "trainer.yml")
+            if os.path.exists(trainer_file):
+                try:
+                    os.remove(trainer_file)
+                except Exception as e:
+                    print(f"Không thể xóa file trainer.yml: {e}")
+            
+            # Xóa các thư mục
+            try:
+                if os.path.exists(samples_dir):
+                    shutil.rmtree(samples_dir)
+            except Exception as e:
+                print(f"Không thể xóa thư mục samples: {e}")
+                
+            try:
+                if os.path.exists(trainer_dir):
+                    shutil.rmtree(trainer_dir)
+            except Exception as e:
+                print(f"Không thể xóa thư mục trainer: {e}")
+            
+            # Cuối cùng xóa thư mục data_dir
+            try:
+                shutil.rmtree(data_dir)
+            except Exception as e:
+                print(f"Không thể xóa thư mục data_dir: {e}")
+                # Tạo lại cấu trúc thư mục nếu xóa không thành công
+                if not os.path.exists(samples_dir):
+                    os.makedirs(samples_dir, exist_ok=True)
+                if not os.path.exists(trainer_dir):
+                    os.makedirs(trainer_dir, exist_ok=True)
         
         return True
     except Exception as e:
